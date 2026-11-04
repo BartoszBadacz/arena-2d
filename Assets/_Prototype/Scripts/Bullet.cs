@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 18f;
     [SerializeField] private float lifetime = 2f;
+    [SerializeField] private int damage = 1;
 
     public void Launch(Vector2 direction)
     {
@@ -18,6 +19,10 @@ public class Bullet : MonoBehaviour
     {
         // Pociski się nawzajem ignorują. Docelowo: warstwy + Layer Collision Matrix.
         if (other.GetComponent<Bullet>() != null) return;
+
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy != null) enemy.TakeDamage(damage);
+
         Destroy(gameObject);
     }
 }

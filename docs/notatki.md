@@ -33,3 +33,6 @@ Każda zmiana skryptu wywołuje w edytorze przeładowanie kodu (domain reload), 
 
 2026-11-04 · tarcie · Magiczne metody Unity nie są typowane
 `Update`, `FixedUpdate`, `OnTriggerEnter2D` itd. Unity znajduje po nazwie: literówka albo zła sygnatura nie daje błędu kompilacji, metoda po prostu się nie wywołuje. Częściowa ochrona to analizatory Unity w IDE (ostrzegają o złej sygnaturze, np. `OnTriggerEnter2D(Collider)` z kolizją 3D zamiast 2D). Kandydat do frameworka: reguła lub analizator przy nazwach podobnych do metod Unity. Kolejny argument, by logika żyła w `Core`, a nie w MonoBehaviourach.
+
+2026-11-04 · powtórzenie · Czekanie na edytor po zmianie skryptu (2. raz)
+Polecenie „przekompiluj” wysłane w trakcie przeładowania kodu zostawiło w konsoli 2 błędy serwera Pipeline (ObjectDisposedException). To nie były błędy gry. Przy trzecim razie: skrypt „zapisz .cs → poczekaj na ready → wyczyść konsolę → sprawdź błędy kompilacji”.

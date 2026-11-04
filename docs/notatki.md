@@ -66,3 +66,6 @@ Playtest 3: przy większych falach wrogowie zlepiają się w kłąb lub „węż
 
 2026-11-04 · decyzja · Wrogowie naraz, ale każdy w innym miejscu (playtest 3, cd.)
 Paczki z jednego punktu wyglądały źle. Teraz każde „tyknięcie” spawnera wypuszcza 1–4 wrogów naraz, każdego w osobnym losowym punkcie na krawędzi (z bezpieczną odległością). Zagęszczenie zostaje, wrogowie nadciągają ze wszystkich stron. Przy samym graczu nadal się zbijają, bo wszyscy idą do jednego punktu. To osobny problem (ruch, nie spawn).
+
+2026-11-04 · decyzja · Separacja wrogów (boids)
+Każdy wróg dodaje do kierunku „do gracza” wektor „od sąsiadów” w promieniu 2.0 (siła 3), im bliżej sąsiad, tym mocniej. Gdy gracz ucieka, tłum idzie za nim luźnym rojem zamiast węża. Gdy gracz stoi, zwarty krąg wokół niego jest nieunikniony (20 wrogów chce dotknąć jednego punktu), a separacja tego nie rozwiąże. To raczej uczciwa informacja „dałeś się otoczyć”. Przy okazji: niejednoznaczne `Random` przy `using System` + `using UnityEngine` — potrzebna pełna nazwa `UnityEngine.Random`.

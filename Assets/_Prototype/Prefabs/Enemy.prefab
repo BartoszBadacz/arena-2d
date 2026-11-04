@@ -182,3 +182,5 @@ MonoBehaviour:
   speed: 3
   maxHealth: 3
   hitFlashDuration: 0.08
+  separationRadius: 2
+  separationStrength: 3

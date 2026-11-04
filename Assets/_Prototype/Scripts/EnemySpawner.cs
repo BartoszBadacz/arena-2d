@@ -1,47 +1,112 @@
 using System;
 using UnityEngine;
 
-// Prototyp: fale „na czas”. Co waveDuration sekund nowa fala: wrogowie pojawiają się częściej i są szybsi.
+// Prototyp: fale „do wybicia”. Fala = określona liczba wrogów; kończy się, gdy zginie ostatni,
+// potem krótka przerwa i następna, trudniejsza fala. Prosta maszyna stanów: Break → Spawning → Fighting → Break.
 public class EnemySpawner : MonoBehaviour
 {
+    public enum State { Break, Spawning, Fighting }
+
     [SerializeField] private Enemy enemyPrefab;
+    [SerializeField] private Transform player;
     [SerializeField] private Vector2 arenaHalfSize = new Vector2(13f, 7f);
+    [SerializeField] private float minDistanceFromPlayer = 6f;
 
     [Header("Fale")]
-    [SerializeField] private float waveDuration = 15f;
-    [SerializeField] private float startInterval = 1.5f;
-    [SerializeField] private float intervalMultiplierPerWave = 0.8f;
+    [SerializeField] private float breakDuration = 3f;
+    [SerializeField] private int firstWaveCount = 5;
+    [SerializeField] private int extraEnemiesPerWave = 3;
+    [SerializeField] private float startInterval = 1.2f;
+    [SerializeField] private float intervalMultiplierPerWave = 0.85f;
     [SerializeField] private float minInterval = 0.2f;
     [SerializeField] private float speedBonusPerWave = 0.3f;
 
     public event Action<int> WaveStarted;
-    public int Wave { get; private set; }
+    public event Action<int> WaveCleared;
 
+    public State CurrentState { get; private set; } = State.Break;
+    public int Wave { get; private set; }                  // 0 = jeszcze przed pierwszą falą
+    public int EnemiesRemaining => toSpawn + alive;        // do pojawienia się + żywi
+    public float BreakTimeLeft => Mathf.Max(0f, stateEndsAt - Time.timeSinceLevelLoad);
+
+    private int toSpawn;
+    private int alive;
+    private float stateEndsAt;
     private float nextSpawnTime;
+
+    private void OnEnable() => Enemy.Killed += OnEnemyKilled;
+    private void OnDisable() => Enemy.Killed -= OnEnemyKilled;
+
+    private void Start() => stateEndsAt = Time.timeSinceLevelLoad + breakDuration;
 
     private void Update()
     {
-        // timeSinceLevelLoad liczy od załadowania sceny — po restarcie zaczyna od zera (Time.time nie).
-        float elapsed = Time.timeSinceLevelLoad;
+        float now = Time.timeSinceLevelLoad;
 
-        int wave = 1 + Mathf.FloorToInt(elapsed / waveDuration);
-        if (wave != Wave)
+        switch (CurrentState)
         {
-            Wave = wave;
-            WaveStarted?.Invoke(Wave);
+            case State.Break:
+                if (now >= stateEndsAt) StartNextWave();
+                break;
+
+            case State.Spawning:
+                if (now < nextSpawnTime) break;
+                nextSpawnTime = now + CurrentInterval();
+                SpawnEnemy();
+                if (toSpawn == 0) CurrentState = State.Fighting;
+                break;
+
+            case State.Fighting:
+                // Koniec fali sprawdzany w OnEnemyKilled.
+                break;
         }
+    }
 
-        if (elapsed < nextSpawnTime) return;
-        nextSpawnTime = elapsed + CurrentInterval();
+    private void StartNextWave()
+    {
+        Wave++;
+        toSpawn = firstWaveCount + extraEnemiesPerWave * (Wave - 1);
+        nextSpawnTime = Time.timeSinceLevelLoad;
+        CurrentState = State.Spawning;
+        WaveStarted?.Invoke(Wave);
+    }
 
-        Enemy enemy = Instantiate(enemyPrefab, RandomEdgePoint(), Quaternion.identity);
+    private void OnEnemyKilled()
+    {
+        alive--;
+        if (CurrentState == State.Fighting && alive == 0)
+        {
+            CurrentState = State.Break;
+            stateEndsAt = Time.timeSinceLevelLoad + breakDuration;
+            WaveCleared?.Invoke(Wave);
+        }
+    }
+
+    private void SpawnEnemy()
+    {
+        Enemy enemy = Instantiate(enemyPrefab, SafeSpawnPoint(), Quaternion.identity);
         enemy.AddSpeed(speedBonusPerWave * (Wave - 1));
+        toSpawn--;
+        alive++;
     }
 
     private float CurrentInterval()
     {
         float interval = startInterval * Mathf.Pow(intervalMultiplierPerWave, Wave - 1);
         return Mathf.Max(interval, minInterval);
+    }
+
+    // Losujemy punkt na krawędzi, aż trafimy dość daleko od gracza (z limitem prób).
+    private Vector2 SafeSpawnPoint()
+    {
+        Vector2 point = RandomEdgePoint();
+        for (int attempt = 0; attempt < 20; attempt++)
+        {
+            if (Vector2.Distance(point, player.position) >= minDistanceFromPlayer) return point;
+            point = RandomEdgePoint();
+        }
+        // Awaryjnie: punkt po przeciwnej stronie areny niż gracz.
+        return -(Vector2)player.position.normalized * arenaHalfSize;
     }
 
     private Vector2 RandomEdgePoint()

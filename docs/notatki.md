@@ -51,3 +51,6 @@ Zmiana skryptu, gdy edytor był w trybie Play, podmieniła kod w trakcie gry. No
 
 2026-11-04 · decyzja · Skalowanie UI w prototypie
 `OnGUI` liczy w pikselach ekranu, więc na dużym oknie napisy były drobne. Skalowanie `GUI.matrix` do wysokości bazowej 720 px. W docelowym UI (UI Toolkit lub uGUI) skalowanie daje Canvas Scaler / Panel Settings.
+
+2026-11-04 · decyzja · Zmiana po pierwszym playteście: fale „do wybicia”
+Playtest: granice rund były niewyraźne, wrogowie pojawiali się zbyt blisko gracza („niesprawiedliwe”), różnica między falami była niewyczuwalna (szybkie zgony). Zmiany: fala = określona liczba wrogów (5, +3 na falę), kończy się po zabiciu ostatniego, potem 3 s przerwy z odliczaniem. Wrogowie pojawiają się co najmniej 6 jednostek od gracza. Rekord to teraz najwyższa fala, bo czas nagradzałby wolne zabijanie. Lekcja: decyzja z 15 minut wcześniej („fale na czas”) nie przetrwała pierwszego kontaktu z graczem. Dlatego prototyp jest tani.

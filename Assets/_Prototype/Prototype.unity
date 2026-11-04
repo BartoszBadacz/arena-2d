@@ -1264,8 +1264,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefab: {fileID: 4625254703038586134, guid: 277d0004d40a6874e987e1435b8595ce, type: 3}
+  player: {fileID: 1224133949}
   arenaHalfSize: {x: 13, y: 7}
-  waveDuration: 15
+  minDistanceFromPlayer: 6
+  breakDuration: 3
+  firstWaveCount: 5
+  extraEnemiesPerWave: 3
   startInterval: 1.5
   intervalMultiplierPerWave: 0.8
   minInterval: 0.2

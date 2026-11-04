@@ -21,3 +21,6 @@ Folder repo już istniał (z `CLAUDE.md` i `docs/`), a `unity projects create` t
 
 2026-11-04 · decyzja · Szablon i ustawienia startowe
 Unity 6.3 LTS, szablon `com.unity.template.universal-2d`. Szablon ma już ustawione Force Text i Visible Meta Files, Input System, Test Framework i pakiet Visual Studio Editor. Platforma buildu od początku przełączona na WebGL, bo zmiana platformy później oznacza pełny reimport.
+
+2026-11-04 · tarcie · MCP nie startował po restarcie VS Code
+Instalator Unity CLI dopisał `unity` do PATH użytkownika, ale zrestartowany VS Code dziedziczył stare środowisko, więc serwer MCP kończył się błędem „Connection closed”, a prośba o zgodę się nie pojawiała. Rozwiązanie: pełna ścieżka do `unity.exe` w `.mcp.json`. Na przyszłość: po instalacji narzędzia z PATH zakładać, że do wylogowania z Windows go nie widać.

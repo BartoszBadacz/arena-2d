@@ -2,7 +2,7 @@
   "mcpServers": {
     "unity-editor": {
       "type": "stdio",
-      "command": "unity",
+      "command": "C:/Users/Bartek/AppData/Local/Unity/bin/unity.exe",
       "args": ["mcp", "--project-path", "."]
     }
   }

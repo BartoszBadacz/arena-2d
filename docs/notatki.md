@@ -63,3 +63,6 @@ Playtest: fale wydawały się takie same i płaskie. Przyczyna: wrogowie wychodz
 
 2026-11-04 · decyzja · Zlepianie się wrogów: separacja teraz, łączenie jako eksperyment
 Playtest 3: przy większych falach wrogowie zlepiają się w kłąb lub „węża”, bo wszyscy idą prosto do jednego punktu, a fizyka rozpycha ich dopiero po zderzeniu. Jako osobne byty wyglądają przez to źle. Pomysł użytkownika: zrobić z tego mechanikę, czyli łączenie w większe byty (slime, Asteroids). To zmiana kierunku gry, więc trafia do roadmapy jako osobny eksperyment. Testujemy jedną rzecz naraz.
+
+2026-11-04 · decyzja · Wrogowie naraz, ale każdy w innym miejscu (playtest 3, cd.)
+Paczki z jednego punktu wyglądały źle. Teraz każde „tyknięcie” spawnera wypuszcza 1–4 wrogów naraz, każdego w osobnym losowym punkcie na krawędzi (z bezpieczną odległością). Zagęszczenie zostaje, wrogowie nadciągają ze wszystkich stron. Przy samym graczu nadal się zbijają, bo wszyscy idą do jednego punktu. To osobny problem (ruch, nie spawn).

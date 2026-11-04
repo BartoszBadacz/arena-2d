@@ -1273,9 +1273,8 @@ MonoBehaviour:
   startInterval: 1.5
   intervalMultiplierPerWave: 0.9
   minInterval: 0.4
-  wavesPerGroupGrowth: 2
-  maxGroupSize: 4
-  groupSpread: 0.8
+  wavesPerBatchGrowth: 2
+  maxBatchSize: 4
   wavesPerSpeedUp: 3
   speedBonusPerSpeedUp: 0.6
   startWave: 1

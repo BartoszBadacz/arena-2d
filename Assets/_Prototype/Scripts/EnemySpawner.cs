@@ -20,10 +20,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float intervalMultiplierPerWave = 0.9f;
     [SerializeField] private float minInterval = 0.4f;
 
-    [Header("Grupy: wrogowie wychodzą paczkami z jednego miejsca")]
-    [SerializeField] private int wavesPerGroupGrowth = 2;   // grupa rośnie o 1 co tyle fal
-    [SerializeField] private int maxGroupSize = 4;
-    [SerializeField] private float groupSpread = 0.8f;
+    [Header("Kilku wrogów naraz, każdy w innym miejscu")]
+    [SerializeField] private int wavesPerBatchGrowth = 2;   // liczba wrogów na raz rośnie o 1 co tyle fal
+    [SerializeField] private int maxBatchSize = 4;
 
     [Header("Szybkość: skokowo co kilka fal")]
     [SerializeField] private int wavesPerSpeedUp = 3;
@@ -41,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
     public int EnemiesRemaining => toSpawn + alive;        // do pojawienia się + żywi
     public float BreakTimeLeft => Mathf.Max(0f, stateEndsAt - Time.timeSinceLevelLoad);
     public bool IsSpeedUpWave => Wave > 1 && (Wave - 1) % wavesPerSpeedUp == 0;
-    private int GroupSize => Mathf.Min(1 + (Wave - 1) / wavesPerGroupGrowth, maxGroupSize);
+    private int BatchSize => Mathf.Min(1 + (Wave - 1) / wavesPerBatchGrowth, maxBatchSize);
     private float SpeedBonus => (Wave - 1) / wavesPerSpeedUp * speedBonusPerSpeedUp;
 
     private int toSpawn;
@@ -71,7 +70,7 @@ public class EnemySpawner : MonoBehaviour
             case State.Spawning:
                 if (now < nextSpawnTime) break;
                 nextSpawnTime = now + CurrentInterval();
-                SpawnGroup();
+                SpawnBatch();
                 if (toSpawn == 0) CurrentState = State.Fighting;
                 break;
 
@@ -101,14 +100,12 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void SpawnGroup()
+    private void SpawnBatch()
     {
-        Vector2 center = SafeSpawnPoint();
-        int count = Mathf.Min(GroupSize, toSpawn);
+        int count = Mathf.Min(BatchSize, toSpawn);
         for (int i = 0; i < count; i++)
         {
-            Vector2 offset = UnityEngine.Random.insideUnitCircle * groupSpread;
-            Enemy enemy = Instantiate(enemyPrefab, center + offset, Quaternion.identity);
+            Enemy enemy = Instantiate(enemyPrefab, SafeSpawnPoint(), Quaternion.identity);
             enemy.AddSpeed(SpeedBonus);
         }
         toSpawn -= count;

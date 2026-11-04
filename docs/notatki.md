@@ -24,3 +24,6 @@ Unity 6.3 LTS, szablon `com.unity.template.universal-2d`. Szablon ma już ustawi
 
 2026-11-04 · tarcie · MCP nie startował po restarcie VS Code
 Instalator Unity CLI dopisał `unity` do PATH użytkownika, ale zrestartowany VS Code dziedziczył stare środowisko, więc serwer MCP kończył się błędem „Connection closed”, a prośba o zgodę się nie pojawiała. Rozwiązanie: pełna ścieżka do `unity.exe` w `.mcp.json`. Na przyszłość: po instalacji narzędzia z PATH zakładać, że do wylogowania z Windows go nie widać.
+
+2026-11-04 · decyzja · Zakres prototypu
+Twin-stick (WASD + celowanie myszką), jeden typ wroga, fale, bez ulepszeń. Celowanie daje frajdę już na szarych prostokątach, a auto-strzał (Vampire Survivors) robi się ciekawy dopiero przy wielu broniach i ulepszeniach. Ulepszenia to najsilniejszy mechanizm „jeszcze jednej rundy”, ale najpierw sprawdzamy, czy bawi samo strzelanie i unikanie.

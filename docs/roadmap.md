@@ -23,8 +23,18 @@ Po stronie Claude:
 
 ## Etap 1 — Prototyp (szare prostokąty)
 
-Do zaplanowania po setupie: pętla rozgrywki, lista „musi być” / „może kiedyś”, kolejność budowania.
 Pytanie, na które prototyp odpowiada: **czy to bawi?**
+
+Pętla: ruch → strzał → wróg ginie → przetrwana fala → trudniejsza fala → śmierć → wynik vs rekord → „jeszcze raz”.
+Sterowanie: WASD + celowanie i strzał myszką (twin-stick). Bez ulepszeń między falami.
+
+Kolejność (każdy krok kończy się czymś grywalnym w Play):
+- [ ] 1. Ruch gracza w zamkniętej arenie
+- [ ] 2. Strzelanie w stronę kursora
+- [ ] 3. Przeciwnik goni gracza, da się go zabić
+- [ ] 4. Życie gracza, śmierć, Game Over + restart ← od tu to jest gra
+- [ ] 5. Fale (coraz liczniejsze i szybsze) + licznik + rekord w sesji
+- [ ] Ocena: czy to bawi? Co zostaje, co wyrzucamy?
 
 ## Etap 2 — Przepisanie na docelową architekturę
 
@@ -37,3 +47,11 @@ Tylko to, co przetrwało prototyp. Zasady w `CLAUDE.md`.
 ## Może kiedyś
 
 (pomysły spoza zakresu lądują tutaj, nie w kodzie)
+
+- ulepszenia między falami (wybór 1 z 3) — pierwszy kandydat, jeśli prototyp okaże się płaski
+- 2–3 typy przeciwników (szybki, gruby, strzelający)
+- dash / unik
+- juice: potrząsanie kamerą, błysk przy trafieniu, cząsteczki
+- dźwięk, grafika (Kenney)
+- trwały rekord (formalnie poza zakresem: „zapis postępu”)
+- tryb auto-strzału w stylu Vampire Survivors

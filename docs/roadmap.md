@@ -18,7 +18,7 @@ Po stronie Claude:
 - [x] pierwszy commit w dobrej kolejności i push
 - [x] projekt otwiera się bez błędów (0 błędów, 0 ostrzeżeń)
 - [x] VS Code: pakiet „Visual Studio Editor” w Unity + rozszerzenie Unity w VS Code, VS Code ustawiony jako edytor skryptów
-- [ ] Unity MCP — agent może sterować edytorem (`.mcp.json` gotowy, do sprawdzenia po restarcie VS Code)
+- [x] Unity MCP — agent steruje edytorem (`.mcp.json`, pełna ścieżka do `unity.exe`)
 - [ ] granice `.asmdef` sprawdzone w praktyce (przy pierwszym skrypcie w `_Project/`)
 
 ## Etap 1 — Prototyp (szare prostokąty)

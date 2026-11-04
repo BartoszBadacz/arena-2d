@@ -39,3 +39,15 @@ Polecenie „przekompiluj” wysłane w trakcie przeładowania kodu zostawiło w
 
 2026-11-04 · decyzja · Wrogowie zderzają się z graczem, ale prawie go nie przepychają
 Kontakt z wrogiem zadaje obrażenia (`OnCollisionStay2D` + 1 s nietykalności), kolizja fizyczna zostaje. Gracz ma masę 20, wróg 1, więc przepychanie jest minimalne. Rozważane przenikanie wrogów przez gracza odrzucone, bo tłum, który „napiera”, daje poczucie zagrożenia.
+
+2026-11-04 · decyzja · Fale „na czas”, wynikiem jest czas przetrwania
+Co 15 s nowa fala: odstęp między wrogami ×0.8 (minimum 0.2 s), prędkość wroga +0.3. Niezabici wrogowie się kumulują, więc presja rośnie sama. Przy falach „do wybicia” wynikiem musiałby być numer fali, bo przy wyniku liczonym w czasie opłacałoby się zabijać wolno. Rekord trzymany w polu `static`: przeżywa restart sceny, ginie po zamknięciu gry (trwały zapis jest poza zakresem).
+
+2026-11-04 · tarcie · Rekompilacja w trybie Play
+Zmiana skryptu, gdy edytor był w trybie Play, podmieniła kod w trakcie gry. Nowe, niepodpięte pole dało ~900 wyjątków NullReference w `OnGUI`. Przed zmianą `.cs` zatrzymać tryb Play. Kandydat na regułę dla agenta: sprawdzić `isPlaying` przed edycją kodu.
+
+2026-11-04 · tarcie · Symulowane klawisze nie zawsze docierają do gry
+`runtime simulate_key` zadziałał dla ruchu (D), ale nie dla restartu (R przy `timeScale = 0`). Prawdopodobnie zależy to od fokusu okna Game. Test restartu zrobiony przez bezpośrednie `SceneManager.LoadScene`. Klawisz R sprawdził użytkownik ręcznie.
+
+2026-11-04 · decyzja · Skalowanie UI w prototypie
+`OnGUI` liczy w pikselach ekranu, więc na dużym oknie napisy były drobne. Skalowanie `GUI.matrix` do wysokości bazowej 720 px. W docelowym UI (UI Toolkit lub uGUI) skalowanie daje Canvas Scaler / Panel Settings.

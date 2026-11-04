@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
 
 // Prototyp: wróg idzie prosto na gracza, ma kilka punktów życia, błyska przy trafieniu.
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
+    // Statyczne zdarzenie: jedno dla wszystkich wrogów, licznik nie musi znać każdego z osobna.
+    public static event Action Killed;
+
     [SerializeField] private float speed = 3f;
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float hitFlashDuration = 0.08f;
@@ -42,10 +46,18 @@ public class Enemy : MonoBehaviour
         body.linearVelocity = direction * speed;
     }
 
+    public void AddSpeed(float bonus) => speed += bonus;
+
     public void TakeDamage(int amount)
     {
+        if (health <= 0) return; // kilka pocisków w jednej klatce nie zabija dwa razy
+
         health -= amount;
         flashUntil = Time.time + hitFlashDuration;
-        if (health <= 0) Destroy(gameObject);
+        if (health <= 0)
+        {
+            Killed?.Invoke();
+            Destroy(gameObject);
+        }
     }
 }

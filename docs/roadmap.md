@@ -33,7 +33,7 @@ Kolejność (każdy krok kończy się czymś grywalnym w Play):
 - [x] 2. Strzelanie w stronę kursora
 - [x] 3. Przeciwnik goni gracza, da się go zabić
 - [x] 4. Życie gracza, śmierć, Game Over + restart ← od tu to jest gra
-- [ ] 5. Fale (coraz liczniejsze i szybsze) + licznik + rekord w sesji
+- [x] 5. Fale (coraz liczniejsze i szybsze) + licznik + rekord w sesji
 - [ ] Ocena: czy to bawi? Co zostaje, co wyrzucamy?
 
 ## Etap 2 — Przepisanie na docelową architekturę

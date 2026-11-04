@@ -97,6 +97,8 @@ public class PrototypeHud : MonoBehaviour
             else if (Time.time < waveBannerUntil)
             {
                 GUI.Label(new Rect(0, 100, width, 60), $"FALA {spawner.Wave}", bigLabel);
+                if (spawner.IsSpeedUpWave)
+                    GUI.Label(new Rect(0, 165, width, 36), "WROGOWIE SZYBSI!", centeredLabel);
             }
         }
 

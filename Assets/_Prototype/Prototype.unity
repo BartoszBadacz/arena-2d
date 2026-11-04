@@ -1268,12 +1268,17 @@ MonoBehaviour:
   arenaHalfSize: {x: 13, y: 7}
   minDistanceFromPlayer: 6
   breakDuration: 3
-  firstWaveCount: 5
-  extraEnemiesPerWave: 3
+  firstWaveCount: 6
+  extraEnemiesPerWave: 4
   startInterval: 1.5
-  intervalMultiplierPerWave: 0.8
-  minInterval: 0.2
-  speedBonusPerWave: 0.3
+  intervalMultiplierPerWave: 0.9
+  minInterval: 0.4
+  wavesPerGroupGrowth: 2
+  maxGroupSize: 4
+  groupSpread: 0.8
+  wavesPerSpeedUp: 3
+  speedBonusPerSpeedUp: 0.6
+  startWave: 1
 --- !u!4 &1838281928
 Transform:
   m_ObjectHideFlags: 0

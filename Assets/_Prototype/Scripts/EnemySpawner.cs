@@ -14,12 +14,24 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Fale")]
     [SerializeField] private float breakDuration = 3f;
-    [SerializeField] private int firstWaveCount = 5;
-    [SerializeField] private int extraEnemiesPerWave = 3;
-    [SerializeField] private float startInterval = 1.2f;
-    [SerializeField] private float intervalMultiplierPerWave = 0.85f;
-    [SerializeField] private float minInterval = 0.2f;
-    [SerializeField] private float speedBonusPerWave = 0.3f;
+    [SerializeField] private int firstWaveCount = 6;
+    [SerializeField] private int extraEnemiesPerWave = 4;
+    [SerializeField] private float startInterval = 1.5f;
+    [SerializeField] private float intervalMultiplierPerWave = 0.9f;
+    [SerializeField] private float minInterval = 0.4f;
+
+    [Header("Grupy: wrogowie wychodzą paczkami z jednego miejsca")]
+    [SerializeField] private int wavesPerGroupGrowth = 2;   // grupa rośnie o 1 co tyle fal
+    [SerializeField] private int maxGroupSize = 4;
+    [SerializeField] private float groupSpread = 0.8f;
+
+    [Header("Szybkość: skokowo co kilka fal")]
+    [SerializeField] private int wavesPerSpeedUp = 3;
+    [SerializeField] private float speedBonusPerSpeedUp = 0.6f;
+
+    [Header("Testy")]
+    [Tooltip("Od której fali zaczynać — do strojenia późniejszych fal bez grania od początku.")]
+    [SerializeField] private int startWave = 1;
 
     public event Action<int> WaveStarted;
     public event Action<int> WaveCleared;
@@ -28,6 +40,9 @@ public class EnemySpawner : MonoBehaviour
     public int Wave { get; private set; }                  // 0 = jeszcze przed pierwszą falą
     public int EnemiesRemaining => toSpawn + alive;        // do pojawienia się + żywi
     public float BreakTimeLeft => Mathf.Max(0f, stateEndsAt - Time.timeSinceLevelLoad);
+    public bool IsSpeedUpWave => Wave > 1 && (Wave - 1) % wavesPerSpeedUp == 0;
+    private int GroupSize => Mathf.Min(1 + (Wave - 1) / wavesPerGroupGrowth, maxGroupSize);
+    private float SpeedBonus => (Wave - 1) / wavesPerSpeedUp * speedBonusPerSpeedUp;
 
     private int toSpawn;
     private int alive;
@@ -37,7 +52,11 @@ public class EnemySpawner : MonoBehaviour
     private void OnEnable() => Enemy.Killed += OnEnemyKilled;
     private void OnDisable() => Enemy.Killed -= OnEnemyKilled;
 
-    private void Start() => stateEndsAt = Time.timeSinceLevelLoad + breakDuration;
+    private void Start()
+    {
+        Wave = Mathf.Max(0, startWave - 1);
+        stateEndsAt = Time.timeSinceLevelLoad + breakDuration;
+    }
 
     private void Update()
     {
@@ -52,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
             case State.Spawning:
                 if (now < nextSpawnTime) break;
                 nextSpawnTime = now + CurrentInterval();
-                SpawnEnemy();
+                SpawnGroup();
                 if (toSpawn == 0) CurrentState = State.Fighting;
                 break;
 
@@ -82,12 +101,18 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy()
+    private void SpawnGroup()
     {
-        Enemy enemy = Instantiate(enemyPrefab, SafeSpawnPoint(), Quaternion.identity);
-        enemy.AddSpeed(speedBonusPerWave * (Wave - 1));
-        toSpawn--;
-        alive++;
+        Vector2 center = SafeSpawnPoint();
+        int count = Mathf.Min(GroupSize, toSpawn);
+        for (int i = 0; i < count; i++)
+        {
+            Vector2 offset = UnityEngine.Random.insideUnitCircle * groupSpread;
+            Enemy enemy = Instantiate(enemyPrefab, center + offset, Quaternion.identity);
+            enemy.AddSpeed(SpeedBonus);
+        }
+        toSpawn -= count;
+        alive += count;
     }
 
     private float CurrentInterval()

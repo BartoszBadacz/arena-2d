@@ -54,3 +54,9 @@ Zmiana skryptu, gdy edytor był w trybie Play, podmieniła kod w trakcie gry. No
 
 2026-11-04 · decyzja · Zmiana po pierwszym playteście: fale „do wybicia”
 Playtest: granice rund były niewyraźne, wrogowie pojawiali się zbyt blisko gracza („niesprawiedliwe”), różnica między falami była niewyczuwalna (szybkie zgony). Zmiany: fala = określona liczba wrogów (5, +3 na falę), kończy się po zabiciu ostatniego, potem 3 s przerwy z odliczaniem. Wrogowie pojawiają się co najmniej 6 jednostek od gracza. Rekord to teraz najwyższa fala, bo czas nagradzałby wolne zabijanie. Lekcja: decyzja z 15 minut wcześniej („fale na czas”) nie przetrwała pierwszego kontaktu z graczem. Dlatego prototyp jest tani.
+
+2026-11-04 · tarcie · Domyślne wartości w kodzie nie zmieniają istniejących obiektów
+Pole `[SerializeField] int x = 5;` daje tylko wartość początkową przy dodaniu komponentu. Potem w scenie lub prefabie zapisana jest wartość z YAML-a i to ona wygrywa. Przez to zmiana parametrów fal w kodzie (1.2 / 0.85) w ogóle nie trafiła do gry, a playtest szedł na starych liczbach. Reguła: po zmianie domyślnych wartości ustawić je też w scenie/prefabie albo stroić tylko w Inspectorze. W architekturze docelowej liczby żyją w ScriptableObjectach, więc źródło prawdy jest jedno. Kandydat na regułę lub automatyczną kontrolę dla agenta.
+
+2026-11-04 · decyzja · Zagęszczenie zamiast tylko liczebności (playtest 2)
+Playtest: fale wydawały się takie same i płaskie. Przyczyna: wrogowie wychodzili pojedynczo i byli na bieżąco zestrzeliwani, więc zagęszczenie na planszy się nie zmieniało. Zmiany: wrogowie wychodzą grupami z jednego miejsca (1 → maks. 4, grupa rośnie co 2 fale), w fali jest ich więcej (6, +4 na falę), szybkość rośnie skokowo co 3 fale (+0.6) z komunikatem „WROGOWIE SZYBSI!”. Do strojenia pole `Start Wave`. Lekcja z game designu: presję tworzy liczba wrogów na planszy naraz, nie ich łączna liczba.

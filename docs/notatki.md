@@ -36,3 +36,6 @@ Każda zmiana skryptu wywołuje w edytorze przeładowanie kodu (domain reload), 
 
 2026-11-04 · powtórzenie · Czekanie na edytor po zmianie skryptu (2. raz)
 Polecenie „przekompiluj” wysłane w trakcie przeładowania kodu zostawiło w konsoli 2 błędy serwera Pipeline (ObjectDisposedException). To nie były błędy gry. Przy trzecim razie: skrypt „zapisz .cs → poczekaj na ready → wyczyść konsolę → sprawdź błędy kompilacji”.
+
+2026-11-04 · decyzja · Wrogowie zderzają się z graczem, ale prawie go nie przepychają
+Kontakt z wrogiem zadaje obrażenia (`OnCollisionStay2D` + 1 s nietykalności), kolizja fizyczna zostaje. Gracz ma masę 20, wróg 1, więc przepychanie jest minimalne. Rozważane przenikanie wrogów przez gracza odrzucone, bo tłum, który „napiera”, daje poczucie zagrożenia.

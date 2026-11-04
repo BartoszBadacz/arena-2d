@@ -14,6 +14,7 @@ Etapy i bieżący stan: [docs/roadmap.md](docs/roadmap.md). Dziennik decyzji i t
 ## Zasady procesu
 
 - **Prototyp najpierw, brudny i do wyrzucenia.** Szare prostokąty, jedna scena, cel: sprawdzić, czy pętla rozgrywki bawi. Zasady architektury poniżej w prototypie NIE obowiązują.
+- **Prototyp żyje w `Assets/_Prototype/`** (kod, scena, prefaby, bez `.asmdef`). Nic z `_Project/` nie zależy od `_Prototype/`. Po prototypie folder usuwamy w całości.
 - **Potem świadome przepisanie** tego, co przetrwało, na docelową architekturę.
 - **Bez frameworka na zapas.** Nie budujemy teraz frameworka do wytwarzania gier. Zamiast tego prowadzimy `docs/notatki.md` (powtórzenia, tarcia, decyzje) — dopisuj tam wpisy na bieżąco, gdy coś się zdarzy.
 

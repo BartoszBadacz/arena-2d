@@ -5,20 +5,21 @@ Stan na bieżąco: odhaczaj zrobione, dopisuj, co wyszło po drodze.
 ## Etap 0 — Setup
 
 Po mojej stronie:
-- [ ] konto Unity i zalogowanie w Unity Hub (licencja Personal)
+- [x] konto Unity i zalogowanie w Unity Hub (licencja Personal)
 - [x] Git + Git LFS zainstalowane
 - [x] `gh` zalogowane do GitHuba
-- [ ] decyzja: nazwa repo na GitHubie (Claude utworzy je przez `gh`)
+- [x] repo na GitHubie: `BartoszBadacz/arena-2d` (publiczne)
 
 Po stronie Claude:
-- [ ] instalacja Unity LTS przez Unity CLI + moduł WebGL
-- [ ] projekt z szablonu „Universal 2D”
-- [ ] `.gitignore`, `.gitattributes` z LFS, ustawienia edytora (Visible Meta Files, Force Text)
-- [ ] struktura `Assets/_Project/` i pliki `.asmdef`
-- [ ] pierwszy commit w dobrej kolejności i push
-- [ ] projekt otwiera się bez błędów
-- [ ] VS Code: pakiet „Visual Studio Editor” w Unity + rozszerzenie Unity w VS Code
-- [ ] Unity MCP — agent może sterować edytorem
+- [x] instalacja Unity 6.3 LTS (6000.3.28f1) przez Unity CLI + moduł WebGL
+- [x] projekt z szablonu „Universal 2D”, platforma buildu: WebGL
+- [x] `.gitignore`, `.gitattributes` z LFS, ustawienia edytora (Visible Meta Files, Force Text)
+- [x] struktura `Assets/_Project/` i pliki `.asmdef`, folder `Assets/_Prototype/`
+- [x] pierwszy commit w dobrej kolejności i push
+- [x] projekt otwiera się bez błędów (0 błędów, 0 ostrzeżeń)
+- [x] VS Code: pakiet „Visual Studio Editor” w Unity + rozszerzenie Unity w VS Code, VS Code ustawiony jako edytor skryptów
+- [ ] Unity MCP — agent może sterować edytorem (`.mcp.json` gotowy, do sprawdzenia po restarcie VS Code)
+- [ ] granice `.asmdef` sprawdzone w praktyce (przy pierwszym skrypcie w `_Project/`)
 
 ## Etap 1 — Prototyp (szare prostokąty)
 

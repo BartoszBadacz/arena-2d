@@ -1,0 +1,18 @@
+{
+    "name": "Arena.Gameplay",
+    "rootNamespace": "Arena.Gameplay",
+    "references": [
+        "Arena.Core",
+        "Arena.Data",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

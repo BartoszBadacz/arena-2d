@@ -30,3 +30,6 @@ Twin-stick (WASD + celowanie myszką), jeden typ wroga, fale, bez ulepszeń. Cel
 
 2026-11-04 · tarcie · MCP rozłącza się przy rekompilacji
 Każda zmiana skryptu wywołuje w edytorze przeładowanie kodu (domain reload), a serwer MCP na ten czas się rozłącza i wywołanie narzędzia kończy się błędem 400. Obejście: po zmianie `.cs` poczekać przez CLI (`unity status` → `ready`) i dopiero wtedy wracać do narzędzi MCP. Przy trzecim wystąpieniu warto zrobić z tego skrypt lub regułę.
+
+2026-11-04 · tarcie · Magiczne metody Unity nie są typowane
+`Update`, `FixedUpdate`, `OnTriggerEnter2D` itd. Unity znajduje po nazwie: literówka albo zła sygnatura nie daje błędu kompilacji, metoda po prostu się nie wywołuje. Częściowa ochrona to analizatory Unity w IDE (ostrzegają o złej sygnaturze, np. `OnTriggerEnter2D(Collider)` z kolizją 3D zamiast 2D). Kandydat do frameworka: reguła lub analizator przy nazwach podobnych do metod Unity. Kolejny argument, by logika żyła w `Core`, a nie w MonoBehaviourach.

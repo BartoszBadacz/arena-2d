@@ -49,6 +49,7 @@ Tylko to, co przetrwało prototyp. Zasady w `CLAUDE.md`.
 (pomysły spoza zakresu lądują tutaj, nie w kodzie)
 
 - ulepszenia między falami (wybór 1 z 3) — pierwszy kandydat, jeśli prototyp okaże się płaski
+- **eksperyment: wrogowie się łączą** w większe byty (slime: łączenie przy kontakcie, rozpad po trafieniu jak w Asteroids). Wymaga mniejszych pojedynczych wrogów. Pomysł z playtestu 3.
 - 2–3 typy przeciwników (szybki, gruby, strzelający)
 - dash / unik
 - juice: potrząsanie kamerą, błysk przy trafieniu, cząsteczki

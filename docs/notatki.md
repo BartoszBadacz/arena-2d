@@ -60,3 +60,6 @@ Pole `[SerializeField] int x = 5;` daje tylko wartość początkową przy dodani
 
 2026-11-04 · decyzja · Zagęszczenie zamiast tylko liczebności (playtest 2)
 Playtest: fale wydawały się takie same i płaskie. Przyczyna: wrogowie wychodzili pojedynczo i byli na bieżąco zestrzeliwani, więc zagęszczenie na planszy się nie zmieniało. Zmiany: wrogowie wychodzą grupami z jednego miejsca (1 → maks. 4, grupa rośnie co 2 fale), w fali jest ich więcej (6, +4 na falę), szybkość rośnie skokowo co 3 fale (+0.6) z komunikatem „WROGOWIE SZYBSI!”. Do strojenia pole `Start Wave`. Lekcja z game designu: presję tworzy liczba wrogów na planszy naraz, nie ich łączna liczba.
+
+2026-11-04 · decyzja · Zlepianie się wrogów: separacja teraz, łączenie jako eksperyment
+Playtest 3: przy większych falach wrogowie zlepiają się w kłąb lub „węża”, bo wszyscy idą prosto do jednego punktu, a fizyka rozpycha ich dopiero po zderzeniu. Jako osobne byty wyglądają przez to źle. Pomysł użytkownika: zrobić z tego mechanikę, czyli łączenie w większe byty (slime, Asteroids). To zmiana kierunku gry, więc trafia do roadmapy jako osobny eksperyment. Testujemy jedną rzecz naraz.

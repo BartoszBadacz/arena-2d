@@ -29,7 +29,7 @@ Pętla: ruch → strzał → wróg ginie → przetrwana fala → trudniejsza fal
 Sterowanie: WASD + celowanie i strzał myszką (twin-stick). Bez ulepszeń między falami.
 
 Kolejność (każdy krok kończy się czymś grywalnym w Play):
-- [ ] 1. Ruch gracza w zamkniętej arenie
+- [x] 1. Ruch gracza w zamkniętej arenie
 - [ ] 2. Strzelanie w stronę kursora
 - [ ] 3. Przeciwnik goni gracza, da się go zabić
 - [ ] 4. Życie gracza, śmierć, Game Over + restart ← od tu to jest gra

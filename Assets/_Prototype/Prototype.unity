@@ -583,6 +583,7 @@ GameObject:
   - component: {fileID: 1224133947}
   - component: {fileID: 1224133946}
   - component: {fileID: 1224133945}
+  - component: {fileID: 1224133950}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -602,7 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1e1135ab37de441a2db67bee2d2cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  speed: 6
+  speed: 9
 --- !u!50 &1224133946
 Rigidbody2D:
   serializedVersion: 5
@@ -750,6 +751,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1224133950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224133944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b643fdb9e7bc7034abc49e0239d1a4ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
+  bulletPrefab: {fileID: 837368604017269323, guid: a3478f9276ca48c4caec1ba2f2409a7e, type: 3}
+  shotsPerSecond: 8
+  muzzleOffset: 0.7
 --- !u!1 &1374204053
 GameObject:
   m_ObjectHideFlags: 0

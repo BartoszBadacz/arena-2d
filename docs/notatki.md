@@ -27,3 +27,6 @@ Instalator Unity CLI dopisał `unity` do PATH użytkownika, ale zrestartowany VS
 
 2026-11-04 · decyzja · Zakres prototypu
 Twin-stick (WASD + celowanie myszką), jeden typ wroga, fale, bez ulepszeń. Celowanie daje frajdę już na szarych prostokątach, a auto-strzał (Vampire Survivors) robi się ciekawy dopiero przy wielu broniach i ulepszeniach. Ulepszenia to najsilniejszy mechanizm „jeszcze jednej rundy”, ale najpierw sprawdzamy, czy bawi samo strzelanie i unikanie.
+
+2026-11-04 · tarcie · MCP rozłącza się przy rekompilacji
+Każda zmiana skryptu wywołuje w edytorze przeładowanie kodu (domain reload), a serwer MCP na ten czas się rozłącza i wywołanie narzędzia kończy się błędem 400. Obejście: po zmianie `.cs` poczekać przez CLI (`unity status` → `ready`) i dopiero wtedy wracać do narzędzi MCP. Przy trzecim wystąpieniu warto zrobić z tego skrypt lub regułę.

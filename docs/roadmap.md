@@ -35,11 +35,18 @@ Kolejność (każdy krok kończy się czymś grywalnym w Play):
 - [x] 4. Życie gracza, śmierć, Game Over + restart ← od tu to jest gra
 - [x] 5. Fale do wybicia (coraz liczniejsze i szybsze) + przerwy z odliczaniem + rekord (najwyższa fala) w sesji
 - [x] Ocena: czy to bawi? → **tak**: szybki przebieg, krótkie rundy, restart „nie boli” (playtest 4, 2026-11-07)
-- [ ] Decyzja: zakres wersji 1 (co z „może kiedyś” wchodzi przed przepisaniem)
+- [x] Decyzja: zakres wersji 1 → rdzeń z prototypu + typy wrogów jako domieszka (patrz Etap 2)
 
 ## Etap 2 — Przepisanie na docelową architekturę
 
 Tylko to, co przetrwało prototyp. Zasady w `CLAUDE.md`.
+
+Zakres wersji 1:
+- rdzeń z prototypu (ruch, strzelanie, fale do wybicia, bezpieczny spawn, separacja, życie, Game Over, rekord fali w sesji)
+- liczby w ScriptableObjectach: `EnemyDefinition` (typ wroga), `WaveConfig` (krzywa fal + domieszki)
+- typy wrogów jako **domieszka** w falach, nie osobne fale: reguły „od fali X, szansa Y%, maks. Z na falę” — balans przez playtesty
+
+Kolejność: najpierw rdzeń w nowej architekturze, potem typy (wtedy nowy typ = nowy plik danych, nie nowy kod).
 
 ## Etap 3 — Grafika, dźwięk, szlif
 
@@ -50,7 +57,7 @@ Tylko to, co przetrwało prototyp. Zasady w `CLAUDE.md`.
 (pomysły spoza zakresu lądują tutaj, nie w kodzie)
 
 - ulepszenia między falami (wybór 1 z 3) — pierwszy kandydat, jeśli prototyp okaże się płaski
-- **eksperyment: wrogowie się łączą** w większe byty (slime: łączenie przy kontakcie, rozpad po trafieniu jak w Asteroids). Wymaga mniejszych pojedynczych wrogów. Pomysł z playtestu 3.
+- ~~eksperyment: wrogowie się łączą~~ — odrzucone z wersji 1 (cięcie zakresu 10x). w większe byty (slime: łączenie przy kontakcie, rozpad po trafieniu jak w Asteroids). Wymaga mniejszych pojedynczych wrogów. Pomysł z playtestu 3.
 - 2–3 typy przeciwników (szybki, gruby, strzelający)
 - dash / unik
 - juice: potrząsanie kamerą, błysk przy trafieniu, cząsteczki

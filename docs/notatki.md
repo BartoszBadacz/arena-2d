@@ -72,3 +72,6 @@ Każdy wróg dodaje do kierunku „do gracza” wektor „od sąsiadów” w pro
 
 2026-11-07 · decyzja · Prototyp odpowiada „tak” — pętla bawi
 Playtest 4: „nawet w tej formie działa nieźle, przebieg gry szybki, krótkie fale sprawiają, że nie szkoda zacząć od nowa”. Niski koszt porażki i szybki restart to fundament gier typu arcade/roguelite. Do zachowania przy przepisaniu: fale do wybicia z przerwami, bezpieczny spawn, wielu wrogów naraz w różnych miejscach, przyspieszenia skokowe, separacja, nietykalność po trafieniu, ciężki gracz. Wnioski z drogi: 4 playtesty w jeden wieczór zmieniły model fal dwa razy, czyli tani prototyp się opłacił.
+
+2026-11-07 · decyzja · Zakres wersji 1
+Wchodzą: rdzeń z prototypu + typy wrogów jako domieszka (np. biegacz od fali 3 z szansą 15%, tank 1 na falę od fali 5). Domieszka zamiast fal jednego typu, bo daje płynną różnorodność bez skoków trudności (pomysł użytkownika). Wypadają: łączenie wrogów (za dużo projektowania, cięcie zakresu 10x). Ulepszenia między falami zostają pierwszym kandydatem po wersji 1. Kolejność: najpierw przepisanie rdzenia na architekturę z danymi w ScriptableObjectach, potem typy. Wtedy balansowanie to edycja plików danych, a nie kodu.

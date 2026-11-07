@@ -69,3 +69,6 @@ Paczki z jednego punktu wyglądały źle. Teraz każde „tyknięcie” spawnera
 
 2026-11-04 · decyzja · Separacja wrogów (boids)
 Każdy wróg dodaje do kierunku „do gracza” wektor „od sąsiadów” w promieniu 2.0 (siła 3), im bliżej sąsiad, tym mocniej. Gdy gracz ucieka, tłum idzie za nim luźnym rojem zamiast węża. Gdy gracz stoi, zwarty krąg wokół niego jest nieunikniony (20 wrogów chce dotknąć jednego punktu), a separacja tego nie rozwiąże. To raczej uczciwa informacja „dałeś się otoczyć”. Przy okazji: niejednoznaczne `Random` przy `using System` + `using UnityEngine` — potrzebna pełna nazwa `UnityEngine.Random`.
+
+2026-11-07 · decyzja · Prototyp odpowiada „tak” — pętla bawi
+Playtest 4: „nawet w tej formie działa nieźle, przebieg gry szybki, krótkie fale sprawiają, że nie szkoda zacząć od nowa”. Niski koszt porażki i szybki restart to fundament gier typu arcade/roguelite. Do zachowania przy przepisaniu: fale do wybicia z przerwami, bezpieczny spawn, wielu wrogów naraz w różnych miejscach, przyspieszenia skokowe, separacja, nietykalność po trafieniu, ciężki gracz. Wnioski z drogi: 4 playtesty w jeden wieczór zmieniły model fal dwa razy, czyli tani prototyp się opłacił.

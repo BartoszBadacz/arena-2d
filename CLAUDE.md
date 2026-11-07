@@ -59,3 +59,15 @@ Zaimportowane paczki assetów leżą poza `_Project/`, w osobnych folderach.
 - **Skala ustalona z góry** (piksele na jednostkę świata, rozmiar grafiki) i zapisana w `docs/notatki.md` — podmiana grafiki ma być wymianą plików, nie przepisywaniem kodu.
 - **Higgsfield** — później: okładka i zrzuty na itch.io, ewentualnie tła. Nie do animacji postaci.
 - **Blender** — odłożony.
+
+## Praca agenta z edytorem Unity
+
+Reguły wyciągnięte z tarć w `docs/notatki.md`.
+
+- **Narzędzia:** serwer MCP `unity-editor` (`.mcp.json`) do sceny/prefabów/Play/zrzutów; Unity CLI pod pełną ścieżką `C:/Users/Bartek/AppData/Local/Unity/bin/unity.exe` (w PATH sesji może go nie być).
+- **Przed edycją `.cs`:** sprawdź, czy edytor jest w trybie Play, i zatrzymaj go. Rekompilacja w trakcie gry podmienia kod na żywo i sypie wyjątkami.
+- **Po edycji `.cs`:** edytor przeładowuje kod (domain reload), a MCP na ten czas się rozłącza. Poczekaj przez CLI na `unity status` → `ready` i `console status` → `compiling: false`, dopiero potem sprawdź błędy i wróć do MCP. Wyjątki `ObjectDisposedException` z serwera Pipeline w konsoli to artefakt tego wyścigu, nie błąd gry — wyczyść konsolę.
+- **Wartości `[SerializeField]`:** zmiana wartości domyślnej w kodzie NIE zmienia istniejących obiektów w scenie ani prefabów. Ustaw je też przez `SerializedObject` (scena) albo `PrefabUtility.LoadPrefabContents` (prefab).
+- **Testy w Play:** logikę sprawdzaj przez `script eval` (stan, refleksja), wynik wizualny przez zrzut Game view. Symulowane klawisze nie zawsze docierają (fokus okna Game) — nie opieraj na nich testu.
+- **Użytkownik może właśnie grać** w edytorze. Zanim uruchomisz testy lub zatrzymasz Play, sprawdź, czy gra nie jest aktywna z jego udziałem.
+- **Rytm pracy:** mały krok → test w Play → commit + push → wpis w `docs/notatki.md` przy tarciu lub decyzji → odhaczenie w `docs/roadmap.md`.

@@ -49,7 +49,7 @@ Zakres wersji 1:
 Kolejność (każdy krok grywalny w Play, scena `Assets/_Project/Scenes/Arena.unity`; plan i decyzje w `docs/notatki.md`, 2026-11-07):
 - [x] 1. Szkielet + ruch: moduł `App` z `GameBootstrap`, `PlayerDefinition` (`Player.asset`), `PlayerMover`, prefaby `Player` i `Arena`
 - [x] 2. Strzelanie: `Weapon` (Core, pierwsze testy), `WeaponDefinition`, `PlayerShooter`, `Projectile`, warstwy + Layer Collision Matrix
-- [ ] 3. Wróg: `Health` i `Separation` (Core + testy), `Slime.asset`, prefab wroga, `HitFlash`, tymczasowy prosty spawner
+- [x] 3. Wróg: `Health` i `Separation` (Core + testy), `Slime.asset`, prefab wroga, `HitFlash`, tymczasowy prosty spawner
 - [ ] 4. Życie gracza, Game Over, restart: nietykalność, `RunSession`, `RunStats`, `SessionRecord`, minimalny HUD (UI Toolkit) ← od tu znowu gra
 - [ ] 5. Fale: `WaveDirector`, `SpawnPointPicker` (+ testy), `Waves.asset` z liczbami z prototypu, baner/odliczanie → **playtest A/B z prototypem**
 - [ ] 6. Usunięcie `Assets/_Prototype` (po A/B; najpierw kontrola odwołań GUID z `_Project` do `_Prototype`)

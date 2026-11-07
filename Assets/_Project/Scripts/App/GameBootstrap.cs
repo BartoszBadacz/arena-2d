@@ -13,18 +13,22 @@ namespace Arena.App
         [Header("Dane")]
         [SerializeField] private PlayerDefinition playerDefinition;
         [SerializeField] private WeaponDefinition weaponDefinition;
+        [SerializeField] private EnemyDefinition enemyDefinition; // tymczasowo: w kroku 5 wrogowie przyjdą z WaveConfig
 
         [Header("Scena")]
         [SerializeField] private Camera mainCamera;
         [SerializeField] private PlayerMover playerMover;
         [SerializeField] private PlayerShooter playerShooter;
+        [SerializeField] private EnemySpawner enemySpawner;
 
         private void Awake()
         {
+            var random = new System.Random();
             var weapon = new Weapon(weaponDefinition.ShotsPerSecond);
 
             playerMover.Init(playerDefinition);
             playerShooter.Init(weapon, weaponDefinition, mainCamera);
+            enemySpawner.Init(enemyDefinition, playerMover.transform, random);
         }
     }
 }

@@ -56,7 +56,7 @@ namespace Arena.Gameplay
                 Destroy(instance);
                 return;
             }
-            projectile.Launch(direction * definition.ProjectileSpeed, definition.ProjectileLifetime);
+            projectile.Launch(direction * definition.ProjectileSpeed, definition.ProjectileLifetime, definition.ProjectileDamage);
         }
     }
 }

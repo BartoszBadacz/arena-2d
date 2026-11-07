@@ -9,6 +9,7 @@ namespace Arena.Data
         [SerializeField, Min(0.1f)] private float shotsPerSecond = 8f;
         [SerializeField, Min(0f)] private float projectileSpeed = 18f;
         [SerializeField, Min(0f)] private float projectileLifetime = 2f;
+        [SerializeField, Min(1)] private int projectileDamage = 1;
         [Tooltip("Jak daleko od środka gracza pojawia się pocisk.")]
         [SerializeField, Min(0f)] private float muzzleOffset = 0.7f;
 
@@ -19,6 +20,7 @@ namespace Arena.Data
         public float ShotsPerSecond => shotsPerSecond;
         public float ProjectileSpeed => projectileSpeed;
         public float ProjectileLifetime => projectileLifetime;
+        public int ProjectileDamage => projectileDamage;
         public float MuzzleOffset => muzzleOffset;
         public GameObject ProjectilePrefab => projectilePrefab;
     }

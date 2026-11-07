@@ -331,6 +331,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1820721505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1820721507}
+  - component: {fileID: 1820721506}
+  m_Layer: 0
+  m_Name: Enemy Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1820721506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820721505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ea14a4767288e458609ed13a8e01a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Arena.Gameplay::Arena.Gameplay.EnemySpawner
+--- !u!4 &1820721507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820721505}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1840054104
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,9 +406,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Arena.App::Arena.App.GameBootstrap
   playerDefinition: {fileID: 11400000, guid: 89512ed67707cab499f21aa0d6bc2368, type: 2}
   weaponDefinition: {fileID: 11400000, guid: d7392135c051b474f86b224d94e2a0fb, type: 2}
+  enemyDefinition: {fileID: 11400000, guid: 1af1038b4c899a34f81b20ce9313e19e, type: 2}
   mainCamera: {fileID: 1759078}
   playerMover: {fileID: 6789755035540938897}
   playerShooter: {fileID: 6789755035540938898}
+  enemySpawner: {fileID: 1820721506}
 --- !u!4 &1840054106
 Transform:
   m_ObjectHideFlags: 0
@@ -525,3 +571,4 @@ SceneRoots:
   - {fileID: 6789755035540938896}
   - {fileID: 1759079}
   - {fileID: 310246924}
+  - {fileID: 1820721507}

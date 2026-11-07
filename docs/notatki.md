@@ -105,3 +105,15 @@ Test Runner przed testami EditMode zamyka otwarte sceny. Gdy któraś jest oznac
 
 2026-11-07 · decyzja · Pierwsza klasa Core i granica `.asmdef` w praktyce
 `Weapon` (kadencja strzałów) z 5 testami EditMode (całość ~3 s, z tego testy < 1 ms). Skompilowane `Arena.Core` zależy wyłącznie od `netstandard`, czyli granica „Core bez Unity” działa. Kolizje pocisków przez warstwy `Player` / `PlayerProjectile` i Layer Collision Matrix zamiast `IgnoreCollision` i sprawdzania typu w kodzie. Kadencja liczona jak w prototypie (`now + 1/rate`), żeby wyczucie w teście A/B było identyczne.
+
+2026-11-07 · tarcie · „Edytor gotowy” nie znaczy „nowy kod wczytany”
+Po zapisie skryptów `unity status` pokazywał `ready`, a `groundTruth` `compiling: false`, ale `script_eval` nie widział nowych typów: auto-refresh nie ruszył, prawdopodobnie bo okno Unity nie miało fokusu. Pomogło `unity recompile`. Reguła w `CLAUDE.md`: po zmianie `.cs` zawsze `recompile` po `ready` (przy 400 poczekać i powtórzyć).
+
+2026-11-07 · decyzja · Interfejs `IHasHealth` w Core jako punkt styku modułów
+Wrogowie powstają w trakcie gry, więc bootstrap nie może podpiąć ich efektów, a spawner (Gameplay) nie widzi Presentation. `IHasHealth` w Core: `EnemyAgent` go implementuje, `HitFlash` (Presentation) i `Projectile` tylko go szukają na obiekcie. Moduły znają Core, nie siebie nawzajem (jak `InjectionToken` we wspólnej bibliotece w Angularze). Ten sam interfejs posłuży graczowi.
+
+2026-11-07 · decyzja · Świadome odstępstwa od prototypu przy wrogu
+Dwie poprawki, które minimalnie zmieniają wyczucie, więc warto je pamiętać przy teście A/B: (1) separacja pomija sąsiadów dalej niż promień. W prototypie `OverlapCircle` łapał też tych, których tylko krawędź wchodziła w okrąg, a waga `1 - d/r` robiła się ujemna, czyli lekko przyciągała. (2) Pocisk trafia tylko raz (flaga `spent`), wcześniej mógł zranić dwóch wrogów w jednym kroku fizyki. Sąsiedzi wyszukiwani po warstwie `Enemy` zamiast `GetComponent<Enemy>()`. 19 testów w Core.
+
+2026-11-07 · tarcie · Błąd „More than one global light” przy dwóch otwartych scenach
+Gdy agent otwiera `Arena.unity` obok prototypu, obie sceny mają swoje Global Light 2D i URP zgłasza błąd w konsoli. To artefakt edycji, nie błąd gry: znika po zamknięciu dodatkowej sceny. Zniknie całkiem po usunięciu prototypu.

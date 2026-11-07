@@ -27,15 +27,18 @@ Clean architecture w lekkiej formie dopasowanej do Unity.
 - **Bez wszechwiedzącego `GameManager` i bez nadużywania singletonów.**
 - **Gra sterowana danymi.** Wszystkie liczby (życie, szybkości, obrażenia, fale) w ScriptableObjectach, nie w kodzie.
 - **Granice modułów przez Assembly Definitions (`.asmdef`).** Moduł `Core` nie zależy od Unity.
-- **DI ręcznie, w jednym miejscu startowym.** Bez bibliotek DI na tym etapie.
+- **DI ręcznie, w jednym miejscu startowym** (`GameBootstrap` w module `App`, wstrzykiwanie metodą `Init(...)`). Bez bibliotek DI na tym etapie.
+- **Stan czytamy, na fakty reagujemy.** Stan (HP, fala, liczniki) to właściwości tylko do odczytu w `Core`, a UI czyta je co klatkę. Fakty (trafienie, śmierć, start fali) to zdarzenia C# (`event`). Bez globalnej szyny zdarzeń.
+- **`Core` nie zna Unity ani ScriptableObjectów:** czas jako argument, losowość jako `System.Random`, ustawienia przez `ToSettings()` na SO, wektory `System.Numerics.Vector2`.
 
 ```
 Assets/_Project/
   Scripts/
     Core/          ← czysta logika C# (Health, WaveLogic, Score) – osobny .asmdef, testy
     Gameplay/      ← MonoBehaviour: gracz, przeciwnicy, broń, spawner
-    Presentation/  ← UI, efekty, dźwięk – nasłuchują zdarzeń
+    Presentation/  ← UI, efekty, dźwięk – czytają stan i nasłuchują zdarzeń z Core
     Data/          ← definicje ScriptableObject (EnemyDefinition, WaveConfig)
+    App/           ← composition root (GameBootstrap) – jedyny moduł, który widzi wszystkie
   Data/            ← konkretne pliki danych: Slime.asset, Wave01.asset
   Prefabs/  Art/  Audio/  Scenes/
 ```

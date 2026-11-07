@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4102776014128250496}
   - component: {fileID: 8451553764319978583}
   - component: {fileID: 1524719761349371856}
-  m_Layer: 0
+  - component: {fileID: 3108703629867984684}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,3 +180,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 902b4fc3a98601c459ff6f45c5ed67d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Arena.Gameplay::Arena.Gameplay.PlayerMover
+--- !u!114 &3108703629867984684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8511337603402401215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c1031e37eddee439404a9106b216b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Arena.Gameplay::Arena.Gameplay.PlayerShooter

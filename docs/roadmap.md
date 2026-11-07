@@ -19,7 +19,7 @@ Po stronie Claude:
 - [x] projekt otwiera się bez błędów (0 błędów, 0 ostrzeżeń)
 - [x] VS Code: pakiet „Visual Studio Editor” w Unity + rozszerzenie Unity w VS Code, VS Code ustawiony jako edytor skryptów
 - [x] Unity MCP — agent steruje edytorem (`.mcp.json`, pełna ścieżka do `unity.exe`)
-- [ ] granice `.asmdef` sprawdzone w praktyce (przy pierwszym skrypcie w `_Project/`)
+- [x] granice `.asmdef` sprawdzone w praktyce (`Arena.Core` zależy tylko od `netstandard`, krok 2 Etapu 2)
 
 ## Etap 1 — Prototyp (szare prostokąty)
 
@@ -48,7 +48,7 @@ Zakres wersji 1:
 
 Kolejność (każdy krok grywalny w Play, scena `Assets/_Project/Scenes/Arena.unity`; plan i decyzje w `docs/notatki.md`, 2026-11-07):
 - [x] 1. Szkielet + ruch: moduł `App` z `GameBootstrap`, `PlayerDefinition` (`Player.asset`), `PlayerMover`, prefaby `Player` i `Arena`
-- [ ] 2. Strzelanie: `Weapon` (Core, pierwsze testy), `WeaponDefinition`, `PlayerShooter`, `Projectile`, warstwy + Layer Collision Matrix
+- [x] 2. Strzelanie: `Weapon` (Core, pierwsze testy), `WeaponDefinition`, `PlayerShooter`, `Projectile`, warstwy + Layer Collision Matrix
 - [ ] 3. Wróg: `Health` i `Separation` (Core + testy), `Slime.asset`, prefab wroga, `HitFlash`, tymczasowy prosty spawner
 - [ ] 4. Życie gracza, Game Over, restart: nietykalność, `RunSession`, `RunStats`, `SessionRecord`, minimalny HUD (UI Toolkit) ← od tu znowu gra
 - [ ] 5. Fale: `WaveDirector`, `SpawnPointPicker` (+ testy), `Waves.asset` z liczbami z prototypu, baner/odliczanie → **playtest A/B z prototypem**

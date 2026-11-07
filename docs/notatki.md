@@ -96,3 +96,12 @@ UI w UI Toolkit (UXML/USS ≈ HTML/CSS, skalowanie przez Panel Settings). Restar
 
 2026-11-07 · decyzja · Parametry fizyki zostają w prefabie
 Masa (20), kolizja ciągła, interpolacja i rozmiar collidera to konfiguracja komponentów, więc zostają w prefabie gracza. W ScriptableObjectach są liczby rozgrywki (prędkość, życie, obrażenia, fale), które stroi się przy balansie.
+
+2026-11-07 · tarcie · Testy EditMode blokują edytor oknem „Scene(s) Have Been Modified”
+Test Runner przed testami EditMode zamyka otwarte sceny. Gdy któraś jest oznaczona jako zmieniona, Unity pokazuje modalne okno z pytaniem o zapis, a edytor i MCP przestają odpowiadać (`test run` → 504 po 10 min, `unity status` → `unreachable`). Diagnoza: lista okien procesu Unity (WinAPI z PowerShella) pokazała tytuł okna dialogowego. Flaga „zmieniona” bywa pusta (scena na dysku identyczna z repo, prawdopodobnie ślad odczytów przez `script_eval`). Reguła: przed testami sprawdzić `isDirty` otwartych scen i w razie potrzeby zapytać użytkownika; gdy edytor nagle przestaje odpowiadać, najpierw szukać okna dialogowego.
+
+2026-11-07 · decyzja · Prefaby w ScriptableObjectach jako `GameObject`
+`WeaponDefinition` (Data) wskazuje prefab pocisku, ale typ `Projectile` leży w Gameplay, a Data nie może znać Gameplay (cykl zależności). Pole ma typ `GameObject`, a Gameplay przy tworzeniu sprawdza `TryGetComponent<Projectile>` i zgłasza czytelny błąd. Tak samo będzie z `EnemyDefinition` → prefab wroga.
+
+2026-11-07 · decyzja · Pierwsza klasa Core i granica `.asmdef` w praktyce
+`Weapon` (kadencja strzałów) z 5 testami EditMode (całość ~3 s, z tego testy < 1 ms). Skompilowane `Arena.Core` zależy wyłącznie od `netstandard`, czyli granica „Core bez Unity” działa. Kolizje pocisków przez warstwy `Player` / `PlayerProjectile` i Layer Collision Matrix zamiast `IgnoreCollision` i sprawdzania typu w kodzie. Kadencja liczona jak w prototypie (`now + 1/rate`), żeby wyczucie w teście A/B było identyczne.

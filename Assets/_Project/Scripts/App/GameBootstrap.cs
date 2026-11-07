@@ -1,3 +1,4 @@
+using Arena.Core;
 using Arena.Data;
 using Arena.Gameplay;
 using UnityEngine;
@@ -11,13 +12,19 @@ namespace Arena.App
     {
         [Header("Dane")]
         [SerializeField] private PlayerDefinition playerDefinition;
+        [SerializeField] private WeaponDefinition weaponDefinition;
 
         [Header("Scena")]
-        [SerializeField] private PlayerMover player;
+        [SerializeField] private Camera mainCamera;
+        [SerializeField] private PlayerMover playerMover;
+        [SerializeField] private PlayerShooter playerShooter;
 
         private void Awake()
         {
-            player.Init(playerDefinition);
+            var weapon = new Weapon(weaponDefinition.ShotsPerSecond);
+
+            playerMover.Init(playerDefinition);
+            playerShooter.Init(weapon, weaponDefinition, mainCamera);
         }
     }
 }

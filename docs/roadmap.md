@@ -46,6 +46,15 @@ Zakres wersji 1:
 - liczby w ScriptableObjectach: `EnemyDefinition` (typ wroga), `WaveConfig` (krzywa fal + domieszki)
 - typy wrogów jako **domieszka** w falach, nie osobne fale: reguły „od fali X, szansa Y%, maks. Z na falę” — balans przez playtesty
 
+Kolejność (każdy krok grywalny w Play, scena `Assets/_Project/Scenes/Arena.unity`; plan i decyzje w `docs/notatki.md`, 2026-11-07):
+- [x] 1. Szkielet + ruch: moduł `App` z `GameBootstrap`, `PlayerDefinition` (`Player.asset`), `PlayerMover`, prefaby `Player` i `Arena`
+- [ ] 2. Strzelanie: `Weapon` (Core, pierwsze testy), `WeaponDefinition`, `PlayerShooter`, `Projectile`, warstwy + Layer Collision Matrix
+- [ ] 3. Wróg: `Health` i `Separation` (Core + testy), `Slime.asset`, prefab wroga, `HitFlash`, tymczasowy prosty spawner
+- [ ] 4. Życie gracza, Game Over, restart: nietykalność, `RunSession`, `RunStats`, `SessionRecord`, minimalny HUD (UI Toolkit) ← od tu znowu gra
+- [ ] 5. Fale: `WaveDirector`, `SpawnPointPicker` (+ testy), `Waves.asset` z liczbami z prototypu, baner/odliczanie → **playtest A/B z prototypem**
+- [ ] 6. Usunięcie `Assets/_Prototype` (po A/B; najpierw kontrola odwołań GUID z `_Project` do `_Prototype`)
+- [ ] 7. Domieszki: `EnemyMixer` (+ testy), `mixIns` w `WaveConfig`, `Runner.asset`, `Tank.asset`, warianty prefabu
+
 Kolejność: najpierw rdzeń w nowej architekturze, potem typy (wtedy nowy typ = nowy plik danych, nie nowy kod).
 
 ## Etap 3 — Grafika, dźwięk, szlif

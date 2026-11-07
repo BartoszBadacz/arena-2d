@@ -87,3 +87,12 @@ Dwa mechanizmy zamiast jednego. Stan (HP, fala, wrogowie do końca, zabici) to w
 
 2026-11-07 · decyzja · UI, restart, domieszki
 UI w UI Toolkit (UXML/USS ≈ HTML/CSS, skalowanie przez Panel Settings). Restart = przeładowanie sceny (świat od zera, bez sprzątania). Rekord sesji w jednym udokumentowanym polu `static` w `SessionRecord`, czytanym tylko przez bootstrap, jako jedyny wyjątek od zasady „bez statyków”. Domieszka typu wroga zastępuje podstawowego wroga w danym miejscu fali (łączna liczba wrogów zostaje z krzywej). Skład fali losowany na jej starcie, więc łatwo go testować.
+
+2026-11-07 · powtórzenie · Czekanie na edytor po zmianie skryptu (3. raz) → reguła
+`unity recompile` sam czeka na koniec kompilacji i zwraca błędy, ale gdy auto-refresh już zaczął przeładowanie po zapisie plików, kończy się błędem 400. Pewniejsza droga: poczekać na `unity status` → `ready`, potem `unity cmd console status` i odczytać `groundTruth` (`compiling`, `compilationFailed`, `consoleErrors`). Dopisane do reguł w `CLAUDE.md`.
+
+2026-11-07 · decyzja · Test nowej sceny bez ruszania otwartej
+`EditorSceneManager.playModeStartScene` = `Arena.unity`: Play ładuje wskazaną scenę, a po wyjściu z Play edytor wraca do otwartej sceny z jej niezapisanymi zmianami. Agent nie musi zamykać ani zapisywać sceny użytkownika. Ustawienie żyje tylko w sesji edytora (nie trafia do repo). Nową scenę agent buduje jako dodatkową (`NewSceneMode.Additive`) i zamyka po zapisie.
+
+2026-11-07 · decyzja · Parametry fizyki zostają w prefabie
+Masa (20), kolizja ciągła, interpolacja i rozmiar collidera to konfiguracja komponentów, więc zostają w prefabie gracza. W ScriptableObjectach są liczby rozgrywki (prędkość, życie, obrażenia, fale), które stroi się przy balansie.

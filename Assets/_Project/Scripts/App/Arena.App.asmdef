@@ -1,0 +1,19 @@
+{
+    "name": "Arena.App",
+    "rootNamespace": "Arena.App",
+    "references": [
+        "Arena.Core",
+        "Arena.Data",
+        "Arena.Gameplay",
+        "Arena.Presentation"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

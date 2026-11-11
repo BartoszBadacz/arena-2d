@@ -28,6 +28,7 @@ namespace Arena.Core
 
         public State CurrentState { get; private set; } = State.Break;
         public int Wave { get; private set; } // 0 = jeszcze przed pierwszą falą
+        public int WaveSize { get; private set; } // ilu wrogów liczy bieżąca fala (znane od WaveStarted)
         public int EnemiesRemaining => toSpawn + alive; // do pojawienia się + żywi
         public float BreakTimeLeft => CurrentState == State.Break ? Math.Max(0f, stateEndsAt - now) : 0f;
         public bool IsSpeedUpWave => Wave > 1 && (Wave - 1) % settings.WavesPerSpeedUp == 0;
@@ -75,6 +76,7 @@ namespace Arena.Core
         {
             Wave++;
             toSpawn = settings.FirstWaveCount + settings.ExtraEnemiesPerWave * (Wave - 1);
+            WaveSize = toSpawn;
             nextSpawnTime = now;
             CurrentState = State.Spawning;
             WaveStarted?.Invoke(Wave);

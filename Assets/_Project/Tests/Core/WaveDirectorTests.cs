@@ -114,6 +114,7 @@ namespace Arena.Core.Tests
 
             Assert.AreEqual(2, director.Wave);
             Assert.AreEqual(settings.FirstWaveCount + settings.ExtraEnemiesPerWave, spawned);
+            Assert.AreEqual(spawned, director.WaveSize);
         }
 
         [Test]

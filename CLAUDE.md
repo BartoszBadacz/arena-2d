@@ -39,7 +39,7 @@ Assets/_Project/
     Presentation/  ← UI, efekty, dźwięk – czytają stan i nasłuchują zdarzeń z Core
     Data/          ← definicje ScriptableObject (EnemyDefinition, WaveConfig)
     App/           ← composition root (GameBootstrap) – jedyny moduł, który widzi wszystkie
-  Data/            ← konkretne pliki danych: Slime.asset, Wave01.asset
+  Data/            ← konkretne pliki danych: Slime.asset, Runner.asset, Waves.asset
   UI/              ← UXML, USS, PanelSettings, motyw (.tss)
   Prefabs/  Art/  Audio/  Scenes/
 ```

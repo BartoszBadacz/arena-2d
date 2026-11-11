@@ -57,7 +57,8 @@ Kolejność (każdy krok grywalny w Play, scena `Assets/_Project/Scenes/Arena.un
   - [x] 5a. kod i dane fal, HUD fal; prędkość gracza poprawiona na 9 (jak w scenie prototypu)
   - [x] 5b. playtest A/B: na zmianę `Prototype.unity` i `Arena.unity` — czy czuć to samo? → tak (2026-11-11)
 - [x] 6. Usunięcie `Assets/_Prototype` (po A/B; najpierw kontrola odwołań GUID z `_Project` do `_Prototype`) → tag `prototype-final`
-- [ ] 7. Domieszki: `EnemyMixer` (+ testy), `mixIns` w `WaveConfig`, `Runner.asset`, `Tank.asset`, warianty prefabu
+- [x] 7. Domieszki: `EnemyMixer` (+ testy), `mixIns` w `WaveConfig`, `Runner.asset`, `Tank.asset`, warianty prefabu
+- [ ] Playtest balansu typów wrogów: liczby Runner/Tank i reguły domieszek w `Waves.asset` (strojenie bez kodu)
 
 Kolejność: najpierw rdzeń w nowej architekturze, potem typy (wtedy nowy typ = nowy plik danych, nie nowy kod).
 

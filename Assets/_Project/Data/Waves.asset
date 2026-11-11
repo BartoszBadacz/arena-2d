@@ -23,4 +23,13 @@ MonoBehaviour:
   maxBatchSize: 4
   wavesPerSpeedUp: 3
   speedBonusPerSpeedUp: 0.6
+  mixIns:
+  - enemy: {fileID: 11400000, guid: 86dc6609703f54d47888ad35a4b6f3d6, type: 2}
+    fromWave: 5
+    chance: 1
+    maxPerWave: 1
+  - enemy: {fileID: 11400000, guid: 62f8590ad23d3c942b7d5177b0cc22e9, type: 2}
+    fromWave: 3
+    chance: 0.15
+    maxPerWave: 0
   startWave: 1

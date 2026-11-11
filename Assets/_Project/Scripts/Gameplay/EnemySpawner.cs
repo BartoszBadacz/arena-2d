@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Arena.Gameplay
 {
     // Klej fal: podaje WaveDirector (Core) upływ czasu, na jego prośbę (SpawnRequested) tworzy wrogów
-    // w bezpiecznych punktach (SpawnPointPicker) i melduje mu każdą śmierć.
+    // w bezpiecznych punktach (SpawnPointPicker) i melduje mu każdą śmierć. Jakiego typu — mówi EnemyMixer (Core).
     public class EnemySpawner : MonoBehaviour
     {
         // Wrogowie powstają w trakcie gry, więc nikt nie podepnie się do każdego z osobna.
@@ -14,17 +14,17 @@ namespace Arena.Gameplay
         public event Action<EnemyDefinition> EnemyKilled;
 
         private WaveDirector director;
+        private EnemyMixer<EnemyDefinition> mixer;
         private SpawnPointPicker spawnPoints;
-        private EnemyDefinition enemy;
         private Transform target;
         private System.Random random;
 
-        public void Init(WaveDirector director, SpawnPointPicker spawnPoints, EnemyDefinition enemy, Transform target,
-                         System.Random random)
+        public void Init(WaveDirector director, EnemyMixer<EnemyDefinition> mixer, SpawnPointPicker spawnPoints,
+                         Transform target, System.Random random)
         {
             this.director = director;
+            this.mixer = mixer;
             this.spawnPoints = spawnPoints;
-            this.enemy = enemy;
             this.target = target;
             this.random = random;
             director.SpawnRequested += SpawnBatch;
@@ -48,10 +48,10 @@ namespace Arena.Gameplay
         private void SpawnBatch(int count)
         {
             Vector2 player = target.position;
-            for (int i = 0; i < count; i++) Spawn(spawnPoints.Pick(player.ToNumerics()).ToUnity());
+            for (int i = 0; i < count; i++) Spawn(mixer.Next(), spawnPoints.Pick(player.ToNumerics()).ToUnity());
         }
 
-        private void Spawn(Vector2 position)
+        private void Spawn(EnemyDefinition enemy, Vector2 position)
         {
             GameObject instance = Instantiate(enemy.Prefab, position, Quaternion.identity);
             if (!instance.TryGetComponent(out EnemyAgent agent))
@@ -62,11 +62,10 @@ namespace Arena.Gameplay
                 return;
             }
             agent.Init(enemy, target, random, director.SpeedBonus);
-            EnemyDefinition killed = enemy;
             agent.Health.Died += () =>
             {
                 director.EnemyDied();
-                EnemyKilled?.Invoke(killed);
+                EnemyKilled?.Invoke(enemy);
             };
         }
     }

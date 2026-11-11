@@ -42,7 +42,7 @@ Kolejność (każdy krok kończy się czymś grywalnym w Play):
 Tylko to, co przetrwało prototyp. Zasady w `CLAUDE.md`.
 
 Zakres wersji 1:
-- rdzeń z prototypu (ruch, strzelanie, fale do wybicia, bezpieczny spawn, separacja, życie, Game Over, rekord fali w sesji)
+- rdzeń z prototypu (ruch, strzelanie, fale do wybicia, bezpieczny spawn, separacja, życie, Game Over, rekord w sesji — od playtestu balansu liczony w punktach)
 - liczby w ScriptableObjectach: `EnemyDefinition` (typ wroga), `WaveConfig` (krzywa fal + domieszki)
 - typy wrogów jako **domieszka** w falach, nie osobne fale: reguły „od fali X, szansa Y%, maks. Z na falę” — balans przez playtesty
 
@@ -59,10 +59,26 @@ Kolejność (każdy krok grywalny w Play, scena `Assets/_Project/Scenes/Arena.un
 - [x] 6. Usunięcie `Assets/_Prototype` (po A/B; najpierw kontrola odwołań GUID z `_Project` do `_Prototype`) → tag `prototype-final`
 - [x] 7. Domieszki: `EnemyMixer` (+ testy), `mixIns` w `WaveConfig`, `Runner.asset`, `Tank.asset`, warianty prefabu
 - [ ] Playtest balansu typów wrogów: liczby Runner/Tank i reguły domieszek w `Waves.asset` (strojenie bez kodu)
+  - [x] runda 1 (2026-11-11): fale rzadsze, punkty i rekord w punktach, Runner nie atakuje i leczy +1 HP
+  - [x] runda 2: Runner chowa się w tłumie, limit 1 na falę rosnący z falami; krzywa fal z malejącym przyrostem; skoki w bok „jak mucha”
+  - [ ] dalej: użytkownik zbiera pomysły (balans „jeszcze do pracy”)
 
 Kolejność: najpierw rdzeń w nowej architekturze, potem typy (wtedy nowy typ = nowy plik danych, nie nowy kod).
 
+## Następna sesja
+
+Kolejność ustalona 2026-11-11:
+1. **Próbny build WebGL** („staging” z Etapu 4 wyciągnięty na początek): przejście całej ścieżki od zera do gry w przeglądarce, zanim zaczniemy upiększać. Sprawdzić: mysz i celowanie w ramce strony, wydajność późnych fal, rozmiar i czas ładowania, skalowanie UI.
+2. **Podsumowanie projektu dla użytkownika**: przejście przez to, co jest (moduły, przepływ zdarzeń, dane, testy), bo zmiany z 2026-11-11 poszły szybko i trzeba je spokojnie zrozumieć.
+
 ## Etap 3 — Grafika, dźwięk, szlif
+
+Zarys (do rozpisania po próbnym buildzie):
+- skala grafiki ustalona i zapisana w `notatki.md` przed pierwszym obrazkiem (PPU, rozmiar sprite'ów)
+- grafika Kenney (CC0): gracz, 3 typy wrogów, pocisk, podłoga, ściany — podmiana sprite'ów w prefabach i wariantach
+- dźwięk w Presentation, nasłuchujący istniejących zdarzeń (`Damaged`, `EnemyKilled`, `WaveStarted`, `GameOver`)
+- juice: potrząsanie kamerą przy trafieniu gracza, cząsteczki przy śmierci wroga
+- ekran startowy („kliknij, aby zacząć” — w przeglądarce potrzebny też do odblokowania dźwięku)
 
 ## Etap 4 — Publikacja na itch.io (WebGL/WebGPU)
 
@@ -72,7 +88,7 @@ Kolejność: najpierw rdzeń w nowej architekturze, potem typy (wtedy nowy typ =
 
 - ulepszenia między falami (wybór 1 z 3) — pierwszy kandydat po wersji 1. Pomysł z playtestu balansu: punkty/zasoby jako waluta na ulepszenia (np. szybkostrzelność), a tank jako „skarb” — pojawia się na jakiś czas i znika niezabity
 - ~~eksperyment: wrogowie się łączą w większe byty~~ (slime: łączenie przy kontakcie, rozpad po trafieniu jak w Asteroids; wymaga mniejszych pojedynczych wrogów). Pomysł z playtestu 3, odrzucony z wersji 1 — cięcie zakresu 10x.
-- 2–3 typy przeciwników (szybki, gruby, strzelający)
+- ~~2–3 typy przeciwników (szybki, gruby)~~ — weszły do wersji 1 (Runner, Tank); zostaje: strzelający
 - dash / unik
 - juice: potrząsanie kamerą, błysk przy trafieniu, cząsteczki
 - dźwięk, grafika (Kenney)

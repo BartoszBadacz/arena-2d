@@ -141,3 +141,6 @@ Przed krokiem 5 porównanie wartości zapisanych w `Prototype.unity` z liczbami 
 
 2026-11-11 · obserwacja · Edytor w tle zwalnia czas gry
 Przy oknie Unity bez fokusu czas gry płynął ok. 2× wolniej niż zegar ścienny (`Czas: 5 s` po ~10 s). Testy czasowe agenta: odpytywać stan gry (konsola, `script_eval`), nie spać według zegara.
+
+2026-11-11 · decyzja · Playtest A/B zaliczony, prototyp usunięty
+Użytkownik potwierdził, że prędkość 9 w scenie prototypu to jego zmiana w Inspectorze z playtestów, o której zapomniał. Nowa wersja „wygląda spoko”, więc test A/B zaliczony. `Assets/_Prototype` usunięty przez `AssetDatabase.DeleteAsset` (razem z `.meta`), scena zdjęta z Build Settings (zostaje tylko `Arena.unity`). Przed usunięciem kontrola GUID: z `_Project` nic nie wskazywało na prototyp, jedynym odwołaniem był wpis w `EditorBuildSettings`. Ostatni commit z prototypem oznaczony tagiem `prototype-final` (powrót: `git checkout prototype-final`). Wniosek na przyszłość: w prototypie notować w `notatki.md` każdą zmianę liczby w Inspectorze, bo pamięć zawodzi, a scena wygrywa z kodem.

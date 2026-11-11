@@ -117,3 +117,15 @@ Dwie poprawki, które minimalnie zmieniają wyczucie, więc warto je pamiętać 
 
 2026-11-07 · tarcie · Błąd „More than one global light” przy dwóch otwartych scenach
 Gdy agent otwiera `Arena.unity` obok prototypu, obie sceny mają swoje Global Light 2D i URP zgłasza błąd w konsoli. To artefakt edycji, nie błąd gry: znika po zamknięciu dodatkowej sceny. Zniknie całkiem po usunięciu prototypu.
+
+2026-11-11 · decyzja · Krok 4a: przebieg rozgrywki w Core, wynik na razie w konsoli
+`RunSession` słucha `Died` gracza i robi zdjęcie wyniku (`RunResult`), `RunStats` liczy zabitych, czas i falę, `SessionRecord` trzyma najwyższą falę. Dwa doprecyzowania planu: (1) pole `static` z rekordem jest w `GameBootstrap`, nie w `SessionRecord`, bo klasa w Core bez statyków daje niezależne testy. (2) `GamePause` i `RestartInput` połączone w jeden cienki `RunFlow` (czas → sesja, `timeScale = 0` przy Game Over, R → przeładowanie sceny). `RunFlow` ustawia `timeScale = 1` w `Awake`, bo ta wartość przeżywa przeładowanie sceny. Obrażenia od kontaktu biorą się z `EnemyDefinition.ContactDamage`. Spawner zbiera `Died` każdego wroga w jedno `EnemyKilled`, a bootstrap łączy je z `RunStats`. Core ma 26 testów.
+
+2026-11-11 · decyzja · Miganie gracza czyta stan, martwy zawsze widoczny
+`HitBlink` co klatkę pyta `Health.IsInvulnerable(now)`, bo „czy migać” to stan, a nie fakt. Poprawka ukrytego błędu prototypu: przy Game Over `timeScale = 0` zamraża `Time.time`, więc gracz mógł zostać „zamrożony” w fazie zgaszonej i zniknąć z ekranu. Martwy gracz jest teraz zawsze widoczny.
+
+2026-11-11 · obserwacja · Nowe pole w ScriptableObjecie bierze wartość z kodu
+Dopisanie `maxHealth = 5` do `PlayerDefinition` dało w istniejącym `Player.asset` od razu 5, bo pola nie było jeszcze w YAML-u. To druga strona pułapki z `[SerializeField]`: wartość z kodu działa tylko dla pól, których plik jeszcze nie zna. Gdy plik raz je zapisze, wygrywa plik.
+
+2026-11-11 · decyzja · `Arena.unity` główną sceną w edytorze
+Po przerwie edytor otworzył prototyp, a `playModeStartScene` działało tylko w poprzedniej sesji. Agent otwiera teraz `Arena.unity` jako główną scenę (prototyp był zapisany), więc Play od razu uruchamia nową wersję. Prototyp otwiera się ręcznie do testu A/B.

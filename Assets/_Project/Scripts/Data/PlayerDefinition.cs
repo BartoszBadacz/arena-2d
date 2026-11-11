@@ -8,7 +8,12 @@ namespace Arena.Data
     public class PlayerDefinition : ScriptableObject
     {
         [SerializeField, Min(0f)] private float moveSpeed = 6f;
+        [SerializeField, Min(1)] private int maxHealth = 5;
+        [Tooltip("Sekundy nietykalności po trafieniu.")]
+        [SerializeField, Min(0f)] private float invulnerabilityDuration = 1f;
 
         public float MoveSpeed => moveSpeed;
+        public int MaxHealth => maxHealth;
+        public float InvulnerabilityDuration => invulnerabilityDuration;
     }
 }

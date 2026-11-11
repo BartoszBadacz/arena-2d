@@ -331,6 +331,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &733424522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 733424524}
+  - component: {fileID: 733424523}
+  m_Layer: 0
+  m_Name: Run Flow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &733424523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733424522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b4e9beb2f1ba846aa495c3363ef232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Arena.Gameplay::Arena.Gameplay.RunFlow
+--- !u!4 &733424524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733424522}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1820721505
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +454,9 @@ MonoBehaviour:
   mainCamera: {fileID: 1759078}
   playerMover: {fileID: 6789755035540938897}
   playerShooter: {fileID: 6789755035540938898}
+  playerBody: {fileID: 6789755035540938899}
   enemySpawner: {fileID: 1820721506}
+  runFlow: {fileID: 733424523}
 --- !u!4 &1840054106
 Transform:
   m_ObjectHideFlags: 0
@@ -562,6 +608,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c1031e37eddee439404a9106b216b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Arena.Gameplay::Arena.Gameplay.PlayerShooter
+--- !u!114 &6789755035540938899 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6091991677436275300, guid: 83291ddf7eeda914886bb05025f63311, type: 3}
+  m_PrefabInstance: {fileID: 6789755035540938896}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51390d6ce1d3c6e4395ed5ea2b93c6d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Arena.Gameplay::Arena.Gameplay.PlayerBody
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -572,3 +629,4 @@ SceneRoots:
   - {fileID: 1759079}
   - {fileID: 310246924}
   - {fileID: 1820721507}
+  - {fileID: 733424524}

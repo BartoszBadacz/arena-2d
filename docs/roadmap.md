@@ -51,6 +51,8 @@ Kolejność (każdy krok grywalny w Play, scena `Assets/_Project/Scenes/Arena.un
 - [x] 2. Strzelanie: `Weapon` (Core, pierwsze testy), `WeaponDefinition`, `PlayerShooter`, `Projectile`, warstwy + Layer Collision Matrix
 - [x] 3. Wróg: `Health` i `Separation` (Core + testy), `Slime.asset`, prefab wroga, `HitFlash`, tymczasowy prosty spawner
 - [ ] 4. Życie gracza, Game Over, restart: nietykalność, `RunSession`, `RunStats`, `SessionRecord`, minimalny HUD (UI Toolkit) ← od tu znowu gra
+  - [x] 4a. logika: życie gracza, obrażenia od kontaktu, Game Over z pauzą (wynik w konsoli), restart R, rekord sesji
+  - [ ] 4b. HUD i ekran Game Over w UI Toolkit
 - [ ] 5. Fale: `WaveDirector`, `SpawnPointPicker` (+ testy), `Waves.asset` z liczbami z prototypu, baner/odliczanie → **playtest A/B z prototypem**
 - [ ] 6. Usunięcie `Assets/_Prototype` (po A/B; najpierw kontrola odwołań GUID z `_Project` do `_Prototype`)
 - [ ] 7. Domieszki: `EnemyMixer` (+ testy), `mixIns` w `WaveConfig`, `Runner.asset`, `Tank.asset`, warianty prefabu

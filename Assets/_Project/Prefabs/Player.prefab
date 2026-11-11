@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 8451553764319978583}
   - component: {fileID: 1524719761349371856}
   - component: {fileID: 3108703629867984684}
+  - component: {fileID: 6091991677436275300}
+  - component: {fileID: 1942702952496587430}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -192,3 +194,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c1031e37eddee439404a9106b216b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Arena.Gameplay::Arena.Gameplay.PlayerShooter
+--- !u!114 &6091991677436275300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8511337603402401215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51390d6ce1d3c6e4395ed5ea2b93c6d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Arena.Gameplay::Arena.Gameplay.PlayerBody
+--- !u!114 &1942702952496587430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8511337603402401215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7a662fa51e66441b34f9a325bf357e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Arena.Presentation::Arena.Presentation.HitBlink
+  blinkInterval: 0.1

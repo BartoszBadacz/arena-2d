@@ -1,3 +1,4 @@
+using System;
 using Arena.Data;
 using UnityEngine;
 
@@ -7,6 +8,10 @@ namespace Arena.Gameplay
     // W kroku 5 o tym, kiedy i ilu wrogów, zdecyduje WaveDirector (Core), a liczby przyjdą z WaveConfig.
     public class EnemySpawner : MonoBehaviour
     {
+        // Wrogowie powstają w trakcie gry, więc nikt nie podepnie się do każdego z osobna.
+        // Spawner słucha śmierci każdego, kogo stworzył, i ogłasza jedno wspólne zdarzenie (jak rodzic zbierający @Output dzieci).
+        public event Action<EnemyDefinition> EnemyKilled;
+
         private const float Interval = 2f;
         private static readonly Vector2[] Corners = { new(-12f, 6f), new(12f, 6f), new(-12f, -6f), new(12f, -6f) };
 
@@ -46,6 +51,8 @@ namespace Arena.Gameplay
                 return;
             }
             agent.Init(enemy, target, random);
+            EnemyDefinition killed = enemy;
+            agent.Health.Died += () => EnemyKilled?.Invoke(killed);
         }
     }
 }

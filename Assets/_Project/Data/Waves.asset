@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Arena.Data::Arena.Data.WaveConfig
   baseEnemy: {fileID: 11400000, guid: 1af1038b4c899a34f81b20ce9313e19e, type: 2}
   breakDuration: 3
-  firstWaveCount: 6
-  extraEnemiesPerWave: 3.6
+  firstWaveCount: 8
+  extraEnemiesPerWave: 4
+  growthDecayPerWave: 0.85
+  minExtraPerWave: 1
   startInterval: 1.5
   intervalMultiplierPerWave: 0.9
   minInterval: 0.4

@@ -39,8 +39,18 @@ namespace Arena.Core
         private float Interval =>
             Math.Max(settings.StartInterval * (float)Math.Pow(settings.IntervalMultiplierPerWave, Wave - 1), settings.MinInterval);
 
-        public int WaveSizeFor(int wave) =>
-            settings.FirstWaveCount + (int)Math.Round(settings.ExtraEnemiesPerWave * (wave - 1), MidpointRounding.AwayFromZero);
+        // Malejący przyrost: fala 2 dokłada ExtraEnemiesPerWave, każda następna ×GrowthDecayPerWave, ale nie mniej niż MinExtraPerWave.
+        public int WaveSizeFor(int wave)
+        {
+            float size = settings.FirstWaveCount;
+            float extra = settings.ExtraEnemiesPerWave;
+            for (int w = 2; w <= wave; w++)
+            {
+                size += Math.Max(extra, settings.MinExtraPerWave);
+                extra *= settings.GrowthDecayPerWave;
+            }
+            return (int)Math.Round(size, MidpointRounding.AwayFromZero);
+        }
 
         public void Tick(float deltaTime)
         {

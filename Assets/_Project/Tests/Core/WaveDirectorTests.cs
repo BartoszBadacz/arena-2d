@@ -131,6 +131,19 @@ namespace Arena.Core.Tests
         }
 
         [Test]
+        public void DecayingGrowth_SlowsDownButNeverStops()
+        {
+            settings.FirstWaveCount = 8;
+            settings.ExtraEnemiesPerWave = 4f;
+            settings.GrowthDecayPerWave = 0.85f;
+            settings.MinExtraPerWave = 1f;
+
+            int[] expected = { 8, 12, 15, 18, 21, 23, 25, 26, 27, 28, 29, 30 };
+            for (int wave = 1; wave <= expected.Length; wave++)
+                Assert.AreEqual(expected[wave - 1], director.WaveSizeFor(wave), $"fala {wave}");
+        }
+
+        [Test]
         public void BatchSize_GrowsEveryFewWavesUpToMax()
         {
             int lastBatch = 0;

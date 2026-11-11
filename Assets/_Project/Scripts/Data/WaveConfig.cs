@@ -29,8 +29,12 @@ namespace Arena.Data
         [Header("Fale")]
         [SerializeField, Min(0f)] private float breakDuration = 3f;
         [SerializeField, Min(1)] private int firstWaveCount = 6;
-        [Tooltip("O ilu wrogów więcej w każdej kolejnej fali. Może być ułamkiem — liczność fali jest zaokrąglana.")]
+        [Tooltip("O ilu wrogów więcej ma fala 2 niż fala 1. Może być ułamkiem — liczność fali jest zaokrąglana.")]
         [SerializeField, Min(0f)] private float extraEnemiesPerWave = 3.6f;
+        [Tooltip("Mnożnik przyrostu na każdą kolejną falę. 1 = stały przyrost; 0.85 = każdy przyrost o 15% mniejszy od poprzedniego.")]
+        [SerializeField, Range(0.5f, 1f)] private float growthDecayPerWave = 1f;
+        [Tooltip("Przyrost nie spada poniżej tej wartości — późne fale wciąż rosną.")]
+        [SerializeField, Min(0f)] private float minExtraPerWave;
         [SerializeField, Min(0.05f)] private float startInterval = 1.5f;
         [SerializeField, Range(0.1f, 1f)] private float intervalMultiplierPerWave = 0.9f;
         [SerializeField, Min(0.05f)] private float minInterval = 0.4f;
@@ -70,6 +74,8 @@ namespace Arena.Data
             BreakDuration = breakDuration,
             FirstWaveCount = firstWaveCount,
             ExtraEnemiesPerWave = extraEnemiesPerWave,
+            GrowthDecayPerWave = growthDecayPerWave,
+            MinExtraPerWave = minExtraPerWave,
             StartInterval = startInterval,
             IntervalMultiplierPerWave = intervalMultiplierPerWave,
             MinInterval = minInterval,

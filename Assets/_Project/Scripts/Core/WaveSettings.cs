@@ -5,7 +5,7 @@ namespace Arena.Core
     {
         public float BreakDuration { get; set; } = 3f;
         public int FirstWaveCount { get; set; } = 6;
-        public int ExtraEnemiesPerWave { get; set; } = 4;
+        public float ExtraEnemiesPerWave { get; set; } = 3.6f; // ułamkowy przyrost; liczność fali jest zaokrąglana
         public float StartInterval { get; set; } = 1.5f;
         public float IntervalMultiplierPerWave { get; set; } = 0.9f;
         public float MinInterval { get; set; } = 0.4f;

@@ -39,6 +39,9 @@ namespace Arena.Core
         private float Interval =>
             Math.Max(settings.StartInterval * (float)Math.Pow(settings.IntervalMultiplierPerWave, Wave - 1), settings.MinInterval);
 
+        public int WaveSizeFor(int wave) =>
+            settings.FirstWaveCount + (int)Math.Round(settings.ExtraEnemiesPerWave * (wave - 1), MidpointRounding.AwayFromZero);
+
         public void Tick(float deltaTime)
         {
             now += deltaTime;
@@ -75,7 +78,7 @@ namespace Arena.Core
         private void StartNextWave()
         {
             Wave++;
-            toSpawn = settings.FirstWaveCount + settings.ExtraEnemiesPerWave * (Wave - 1);
+            toSpawn = WaveSizeFor(Wave);
             WaveSize = toSpawn;
             nextSpawnTime = now;
             CurrentState = State.Spawning;

@@ -27,7 +27,8 @@ namespace Arena.Data
         [Header("Fale")]
         [SerializeField, Min(0f)] private float breakDuration = 3f;
         [SerializeField, Min(1)] private int firstWaveCount = 6;
-        [SerializeField, Min(0)] private int extraEnemiesPerWave = 4;
+        [Tooltip("O ilu wrogów więcej w każdej kolejnej fali. Może być ułamkiem — liczność fali jest zaokrąglana.")]
+        [SerializeField, Min(0f)] private float extraEnemiesPerWave = 3.6f;
         [SerializeField, Min(0.05f)] private float startInterval = 1.5f;
         [SerializeField, Range(0.1f, 1f)] private float intervalMultiplierPerWave = 0.9f;
         [SerializeField, Min(0.05f)] private float minInterval = 0.4f;

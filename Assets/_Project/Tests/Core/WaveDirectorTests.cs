@@ -113,8 +113,21 @@ namespace Arena.Core.Tests
             TickUntilAllSpawned();
 
             Assert.AreEqual(2, director.Wave);
-            Assert.AreEqual(settings.FirstWaveCount + settings.ExtraEnemiesPerWave, spawned);
+            Assert.AreEqual(director.WaveSizeFor(2), spawned);
+            Assert.Greater(spawned, settings.FirstWaveCount);
             Assert.AreEqual(spawned, director.WaveSize);
+        }
+
+        [Test]
+        public void FractionalGrowth_IsRounded()
+        {
+            settings.FirstWaveCount = 6;
+            settings.ExtraEnemiesPerWave = 3.6f;
+
+            Assert.AreEqual(6, director.WaveSizeFor(1));
+            Assert.AreEqual(10, director.WaveSizeFor(2));  // 9.6
+            Assert.AreEqual(20, director.WaveSizeFor(5));  // 20.4 (wcześniej 22 przy +4)
+            Assert.AreEqual(38, director.WaveSizeFor(10)); // 38.4 (wcześniej 42)
         }
 
         [Test]

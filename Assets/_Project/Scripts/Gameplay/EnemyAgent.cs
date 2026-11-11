@@ -8,6 +8,7 @@ namespace Arena.Gameplay
     // Wróg: cienki klej. Pyta fizykę o sąsiadów, kierunek liczy Steering (Core), życie trzyma Health (Core).
     // Zachowanie z danych: Chase goni gracza, Flee ucieka i ślizga się wzdłuż krawędzi areny (KeepInside),
     // HideInCrowd biegnie do losowego innego wroga i co chwilę zmienia kryjówkę (TargetSwitcher z Core).
+    // Opcjonalnie skacze w bok jak mucha (Darting z Core), jeśli definicja ma ustawiony czas skoku.
     // Tworzy go spawner i od razu wywołuje Init — przed pierwszym FixedUpdate.
     [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyAgent : MonoBehaviour, IHasHealth
@@ -20,6 +21,7 @@ namespace Arena.Gameplay
         private EnemyContext context;
         private float speed;
         private TargetSwitcher<EnemyAgent> cover;
+        private Darting darting; // null = bez skoków w bok
         private Func<EnemyAgent, bool> isValidCover;
         private Rigidbody2D body;
         private ContactFilter2D neighbourFilter;
@@ -37,6 +39,8 @@ namespace Arena.Gameplay
             Health.Died += OnDied;
             if (definition.Behavior == EnemyBehavior.HideInCrowd)
                 cover = new TargetSwitcher<EnemyAgent>(definition.RetargetInterval, context.Random);
+            DartSettings dartSettings = definition.ToDartSettings();
+            if (dartSettings != null) darting = new Darting(dartSettings, context.Random);
         }
 
         private void Awake()
@@ -68,10 +72,13 @@ namespace Arena.Gameplay
 
             System.Numerics.Vector2 velocity = definition.Behavior switch
             {
-                EnemyBehavior.Flee => Steering.KeepInside(self, FleeFrom(self, player, separation), context.ArenaHalfSize),
-                EnemyBehavior.HideInCrowd => Steering.KeepInside(self, HideVelocity(self, player, separation), context.ArenaHalfSize),
+                EnemyBehavior.Flee => FleeFrom(self, player, separation),
+                EnemyBehavior.HideInCrowd => HideVelocity(self, player, separation),
                 _ => Steering.Chase(self, player, separation, definition.SeparationStrength, speed),
             };
+            if (darting != null) velocity = darting.Apply(velocity, Time.time);
+            // Uciekający i chowający się nie mogą wbić się w ścianę (tarcie by ich zatrzymało) — ślizgają się wzdłuż niej.
+            if (definition.Behavior != EnemyBehavior.Chase) velocity = Steering.KeepInside(self, velocity, context.ArenaHalfSize);
             body.linearVelocity = velocity.ToUnity();
         }
 

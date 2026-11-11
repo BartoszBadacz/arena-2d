@@ -16,9 +16,13 @@ MonoBehaviour:
   behavior: 2
   retargetInterval: 2.5
   maxHealth: 1
-  speed: 5
+  speed: 6
   contactDamage: 0
   scoreValue: 10
   healOnKill: 1
+  dartDuration: 0.15
+  dartIntervalMin: 0.3
+  dartIntervalMax: 0.8
+  dartSpeedMultiplier: 1.8
   separationRadius: 2
   separationStrength: 3

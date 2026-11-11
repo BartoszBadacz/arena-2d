@@ -162,3 +162,9 @@ Zamiast stać w rogu, biegacz biegnie do losowego innego wroga (tylko spośród 
 
 2026-11-11 · decyzja · Krzywa liczności fal z malejącym przyrostem (playtest balansu 2)
 Playtest: „jest dużo lepiej”, użytkownik doszedł do fali 7, ale fala 7 to już chmara. Liniowy przyrost (+3.6 na falę) zastąpiony malejącym: fala 2 dokłada `extraEnemiesPerWave`, każda następna ×`growthDecayPerWave`, nie mniej niż `minExtraPerWave`. Wartości: start 8 (było 6), przyrost 4, ×0.85, minimum 1. Liczności: 8, 12, 15, 18, 21, 23, 25, 26, 27, 28 (fala 7: 28 → 25, fala 10: 38 → 28), potem +1 na falę. Przy `growthDecayPerWave = 1` zachowanie liniowe jak wcześniej (stare testy bez zmian). Do obserwacji: chmarę w późnych falach tworzy też tempo wychodzenia (paczki do 4 wrogów co ~0.8 s). Kolejne pokrętła to `wavesPerBatchGrowth`, `maxBatchSize` i `intervalMultiplierPerWave` w tym samym pliku.
+
+2026-11-11 · decyzja · Runner skacze w bok jak mucha
+Prośba z playtestu: żółtego nieco przyspieszyć i dodać skoki w bok. `Darting` w Core (5 testów): co losowy czas (0.3–0.8 s) krótki zryw (0.15 s) w lewo lub w prawo względem kierunku ruchu, ×1.8 prędkości, z 35% „do przodu” (skos zamiast czystego bokiem), potem powrót na kurs. Liczony przed `KeepInside`, więc nie wyskakuje za krawędź. Parametry w `EnemyDefinition` (sekcja „Skoki w bok”). `dartDuration = 0` wyłącza skoki, więc Slime i Tank bez zmian. Runner: prędkość 5 → 6. Core ma 73 testy.
+
+2026-11-11 · tarcie · Agent wszedł w rozgrywkę użytkownika
+Między testami agenta użytkownik sam uruchomił Play. `playmode_start` zwrócił „Already in play mode”, ale agent zdążył już ustawić graczowi nieśmiertelność (do testu) w rozgrywce użytkownika. Zmianę cofnięto, gdy tylko stan gry (fala 1, gracz poza środkiem) to ujawnił. Reguła: przed każdym wejściem w Play sprawdzić `editor_status`. Jeśli Play już trwa, a agent go nie włączał, to gra użytkownik i nie wolno ruszać stanu gry.

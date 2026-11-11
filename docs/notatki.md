@@ -168,3 +168,6 @@ Prośba z playtestu: żółtego nieco przyspieszyć i dodać skoki w bok. `Darti
 
 2026-11-11 · tarcie · Agent wszedł w rozgrywkę użytkownika
 Między testami agenta użytkownik sam uruchomił Play. `playmode_start` zwrócił „Already in play mode”, ale agent zdążył już ustawić graczowi nieśmiertelność (do testu) w rozgrywce użytkownika. Zmianę cofnięto, gdy tylko stan gry (fala 1, gracz poza środkiem) to ujawnił. Reguła: przed każdym wejściem w Play sprawdzić `editor_status`. Jeśli Play już trwa, a agent go nie włączał, to gra użytkownik i nie wolno ruszać stanu gry.
+
+2026-11-11 · decyzja · Równoległe testowanie jest OK
+Użytkownik: „obaj testujemy grę, robiliśmy coś w tym samym czasie i tyle — zero konsekwencji”. Reguła z poprzedniego wpisu (nie ruszać gry użytkownika) zastąpiona w `CLAUDE.md` zasadą „testujemy równolegle”: kolizji w Play nie trzeba unikać ani za nie przepraszać.

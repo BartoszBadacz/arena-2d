@@ -1,6 +1,7 @@
 using Arena.Core;
 using Arena.Data;
 using Arena.Gameplay;
+using Arena.Presentation;
 using UnityEngine;
 
 namespace Arena.App
@@ -26,6 +27,7 @@ namespace Arena.App
         [SerializeField] private PlayerBody playerBody;
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private RunFlow runFlow;
+        [SerializeField] private Hud hud;
 
         private void Awake()
         {
@@ -47,6 +49,7 @@ namespace Arena.App
             playerBody.Init(playerHealth);
             enemySpawner.Init(enemyDefinition, playerMover.transform, random);
             runFlow.Init(session);
+            hud.Init(playerHealth, stats, sessionRecord, session);
         }
     }
 }

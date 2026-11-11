@@ -40,6 +40,7 @@ Assets/_Project/
     Data/          ← definicje ScriptableObject (EnemyDefinition, WaveConfig)
     App/           ← composition root (GameBootstrap) – jedyny moduł, który widzi wszystkie
   Data/            ← konkretne pliki danych: Slime.asset, Wave01.asset
+  UI/              ← UXML, USS, PanelSettings, motyw (.tss)
   Prefabs/  Art/  Audio/  Scenes/
 ```
 

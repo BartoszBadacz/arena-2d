@@ -129,3 +129,6 @@ Dopisanie `maxHealth = 5` do `PlayerDefinition` dało w istniejącym `Player.ass
 
 2026-11-11 · decyzja · `Arena.unity` główną sceną w edytorze
 Po przerwie edytor otworzył prototyp, a `playModeStartScene` działało tylko w poprzedniej sesji. Agent otwiera teraz `Arena.unity` jako główną scenę (prototyp był zapisany), więc Play od razu uruchamia nową wersję. Prototyp otwiera się ręcznie do testu A/B.
+
+2026-11-11 · decyzja · HUD w UI Toolkit (krok 4b)
+Pliki UI w `Assets/_Project/UI/`: `Hud.uxml` (struktura), `Hud.uss` (style, klasy w konwencji BEM: `hud__stat`, `game-over--hidden`), `PanelSettings.asset` (Scale With Screen Size, 1280×720, dopasowanie do wysokości, jak `GUI.matrix` w prototypie) i `ArenaTheme.tss` (`@import url("unity-theme://default")` daje domyślną czcionkę; bez motywu tekst się nie renderuje). Logika HUD w `Presentation/Hud.cs`: stan czyta co klatkę, ale napis zmienia tylko przy zmianie liczby (bez nowego stringa co klatkę, ważne dla GC w WebGL). Ekran Game Over pojawia się na zdarzenie `GameOver` przez zdjęcie klasy `game-over--hidden`, bez stylów inline. HUD to prefab z `UIDocument`. Do sprawdzenia w kroku 5: polskie znaki w domyślnej czcionce (`UKOŃCZONA`, `SZYBSI`).

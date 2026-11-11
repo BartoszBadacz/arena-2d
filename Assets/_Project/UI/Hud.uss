@@ -1,0 +1,52 @@
+.hud {
+    flex-grow: 1;
+}
+
+.hud__stats {
+    flex-direction: row;
+    padding: 16px 20px;
+}
+
+.hud__stat {
+    margin-right: 32px;
+    font-size: 24px;
+    color: rgb(235, 235, 240);
+}
+
+.game-over {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(10, 10, 15, 0.6);
+}
+
+.game-over--hidden {
+    display: none;
+}
+
+.game-over__title {
+    margin-bottom: 16px;
+    font-size: 64px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+}
+
+.game-over__line {
+    margin-bottom: 8px;
+    font-size: 28px;
+    color: rgb(235, 235, 240);
+}
+
+.game-over__record {
+    color: rgb(255, 216, 77);
+}
+
+.game-over__hint {
+    margin-top: 24px;
+    font-size: 22px;
+    color: rgb(160, 160, 175);
+}

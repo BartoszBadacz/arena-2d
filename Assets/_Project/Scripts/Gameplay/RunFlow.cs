@@ -47,12 +47,7 @@ namespace Arena.Gameplay
                 SceneManager.LoadScene(gameObject.scene.buildIndex);
         }
 
-        private void OnGameOver(RunResult result)
-        {
-            Time.timeScale = 0f; // zatrzymuje fizykę i wszystko, co liczy czas gry
-            // Tymczasowo, do kroku 4b: wynik w konsoli zamiast ekranu Game Over.
-            Debug.Log($"GAME OVER — fala {result.Wave}, zabici {result.Kills}, czas {result.SurvivedTime:0} s, " +
-                      (result.IsNewRecord ? "NOWY REKORD!" : $"rekord: fala {result.BestWave}") + " — R = restart");
-        }
+        // Wynik pokazuje HUD (Presentation) — tu tylko zatrzymanie świata.
+        private void OnGameOver(RunResult result) => Time.timeScale = 0f; // stop fizyki i wszystkiego, co liczy czas gry
     }
 }

@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="Hud.uss" />
+    <ui:VisualElement name="root" class="hud" picking-mode="Ignore">
+        <ui:VisualElement name="stats" class="hud__stats" picking-mode="Ignore">
+            <ui:Label name="healthLabel" class="hud__stat" text="HP: 5/5" />
+            <ui:Label name="killsLabel" class="hud__stat" text="Zabici: 0" />
+            <ui:Label name="timeLabel" class="hud__stat" text="Czas: 0 s" />
+            <ui:Label name="recordLabel" class="hud__stat" text="Rekord: fala 0" />
+        </ui:VisualElement>
+        <ui:VisualElement name="gameOverPanel" class="game-over game-over--hidden" picking-mode="Ignore">
+            <ui:Label class="game-over__title" text="GAME OVER" />
+            <ui:Label name="summaryLabel" class="game-over__line" text="Fala: 0   Zabici: 0   Czas: 0 s" />
+            <ui:Label name="recordResultLabel" class="game-over__line" text="Rekord: fala 0" />
+            <ui:Label class="game-over__hint" text="R — restart" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

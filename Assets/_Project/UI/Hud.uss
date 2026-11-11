@@ -13,6 +13,34 @@
     color: rgb(235, 235, 240);
 }
 
+.banner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100px;
+    align-items: center;
+}
+
+.banner--hidden {
+    display: none;
+}
+
+.banner__title {
+    font-size: 48px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+}
+
+.banner__subtitle {
+    margin-top: 8px;
+    font-size: 26px;
+    color: rgb(255, 216, 77);
+}
+
+.banner__subtitle--hidden {
+    display: none;
+}
+
 .game-over {
     position: absolute;
     left: 0;

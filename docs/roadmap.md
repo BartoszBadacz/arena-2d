@@ -54,6 +54,8 @@ Kolejność (każdy krok grywalny w Play, scena `Assets/_Project/Scenes/Arena.un
   - [x] 4a. logika: życie gracza, obrażenia od kontaktu, Game Over z pauzą (wynik w konsoli), restart R, rekord sesji
   - [x] 4b. HUD i ekran Game Over w UI Toolkit
 - [ ] 5. Fale: `WaveDirector`, `SpawnPointPicker` (+ testy), `Waves.asset` z liczbami z prototypu, baner/odliczanie → **playtest A/B z prototypem**
+  - [x] 5a. kod i dane fal, HUD fal; prędkość gracza poprawiona na 9 (jak w scenie prototypu)
+  - [ ] 5b. playtest A/B: na zmianę `Prototype.unity` i `Arena.unity` — czy czuć to samo?
 - [ ] 6. Usunięcie `Assets/_Prototype` (po A/B; najpierw kontrola odwołań GUID z `_Project` do `_Prototype`)
 - [ ] 7. Domieszki: `EnemyMixer` (+ testy), `mixIns` w `WaveConfig`, `Runner.asset`, `Tank.asset`, warianty prefabu
 

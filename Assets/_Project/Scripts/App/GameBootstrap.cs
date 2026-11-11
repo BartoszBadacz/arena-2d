@@ -18,7 +18,8 @@ namespace Arena.App
         [Header("Dane")]
         [SerializeField] private PlayerDefinition playerDefinition;
         [SerializeField] private WeaponDefinition weaponDefinition;
-        [SerializeField] private EnemyDefinition enemyDefinition; // tymczasowo: w kroku 5 wrogowie przyjdą z WaveConfig
+        [SerializeField] private WaveConfig waveConfig;
+        [SerializeField] private ArenaConfig arenaConfig;
 
         [Header("Scena")]
         [SerializeField] private Camera mainCamera;
@@ -39,17 +40,21 @@ namespace Arena.App
             var playerHealth = new Health(playerDefinition.MaxHealth, playerDefinition.InvulnerabilityDuration);
             var stats = new RunStats();
             var session = new RunSession(playerHealth, stats, sessionRecord);
+            var waves = new WaveDirector(waveConfig.ToSettings());
+            var spawnPoints = new SpawnPointPicker(
+                new System.Numerics.Vector2(arenaConfig.HalfSize.x, arenaConfig.HalfSize.y), arenaConfig.MinSpawnDistance, random);
 
-            // Fakty z Gameplay → logika
+            // Fakty → logika
+            waves.WaveStarted += stats.ReachWave;
             enemySpawner.EnemyKilled += _ => stats.RegisterKill();
 
             // Wstrzyknięcie do obiektów sceny
             playerMover.Init(playerDefinition);
             playerShooter.Init(weapon, weaponDefinition, mainCamera);
             playerBody.Init(playerHealth);
-            enemySpawner.Init(enemyDefinition, playerMover.transform, random);
+            enemySpawner.Init(waves, spawnPoints, waveConfig.BaseEnemy, playerMover.transform, random);
             runFlow.Init(session);
-            hud.Init(playerHealth, stats, sessionRecord, session);
+            hud.Init(playerHealth, stats, sessionRecord, session, waves);
         }
     }
 }

@@ -17,17 +17,20 @@ namespace Arena.Gameplay
         private EnemyDefinition definition;
         private Transform target;
         private System.Random random;
+        private float speed;
         private Rigidbody2D body;
         private ContactFilter2D neighbourFilter;
 
         public Health Health { get; private set; }
         public EnemyDefinition Definition => definition;
 
-        public void Init(EnemyDefinition definition, Transform target, System.Random random)
+        // speedBonus: przyspieszenie od fali (WaveDirector.SpeedBonus), dodawane do prędkości z definicji.
+        public void Init(EnemyDefinition definition, Transform target, System.Random random, float speedBonus = 0f)
         {
             this.definition = definition;
             this.target = target;
             this.random = random;
+            speed = definition.Speed + speedBonus;
             Health = new Health(definition.MaxHealth);
             Health.Died += OnDied;
         }
@@ -54,7 +57,7 @@ namespace Arena.Gameplay
             System.Numerics.Vector2 self = body.position.ToNumerics();
             System.Numerics.Vector2 separation = Steering.Separation(self, Neighbours(), definition.SeparationRadius, random);
             System.Numerics.Vector2 velocity = Steering.Chase(
-                self, ((Vector2)target.position).ToNumerics(), separation, definition.SeparationStrength, definition.Speed);
+                self, ((Vector2)target.position).ToNumerics(), separation, definition.SeparationStrength, speed);
             body.linearVelocity = velocity.ToUnity();
         }
 

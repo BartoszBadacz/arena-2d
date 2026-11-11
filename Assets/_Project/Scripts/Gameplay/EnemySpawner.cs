@@ -1,44 +1,54 @@
 using System;
+using Arena.Core;
 using Arena.Data;
 using UnityEngine;
 
 namespace Arena.Gameplay
 {
-    // TYMCZASOWY (krok 3 przepisania): jeden wróg co 2 s w losowym rogu areny.
-    // W kroku 5 o tym, kiedy i ilu wrogów, zdecyduje WaveDirector (Core), a liczby przyjdą z WaveConfig.
+    // Klej fal: podaje WaveDirector (Core) upływ czasu, na jego prośbę (SpawnRequested) tworzy wrogów
+    // w bezpiecznych punktach (SpawnPointPicker) i melduje mu każdą śmierć.
     public class EnemySpawner : MonoBehaviour
     {
         // Wrogowie powstają w trakcie gry, więc nikt nie podepnie się do każdego z osobna.
         // Spawner słucha śmierci każdego, kogo stworzył, i ogłasza jedno wspólne zdarzenie (jak rodzic zbierający @Output dzieci).
         public event Action<EnemyDefinition> EnemyKilled;
 
-        private const float Interval = 2f;
-        private static readonly Vector2[] Corners = { new(-12f, 6f), new(12f, 6f), new(-12f, -6f), new(12f, -6f) };
-
+        private WaveDirector director;
+        private SpawnPointPicker spawnPoints;
         private EnemyDefinition enemy;
         private Transform target;
         private System.Random random;
-        private float nextSpawnTime;
 
-        public void Init(EnemyDefinition enemy, Transform target, System.Random random)
+        public void Init(WaveDirector director, SpawnPointPicker spawnPoints, EnemyDefinition enemy, Transform target,
+                         System.Random random)
         {
+            this.director = director;
+            this.spawnPoints = spawnPoints;
             this.enemy = enemy;
             this.target = target;
             this.random = random;
+            director.SpawnRequested += SpawnBatch;
         }
 
         private void Start()
         {
-            if (enemy != null) return;
+            if (director != null) return;
             Debug.LogError($"{nameof(EnemySpawner)}: brak Init — czy w scenie jest GameBootstrap?", this);
             enabled = false;
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            if (Time.time < nextSpawnTime) return;
-            nextSpawnTime = Time.time + Interval;
-            Spawn(Corners[random.Next(Corners.Length)]);
+            if (director != null) director.SpawnRequested -= SpawnBatch;
+        }
+
+        private void Update() => director.Tick(Time.deltaTime);
+
+        // Każdy wróg z paczki w innym, losowym punkcie na krawędzi.
+        private void SpawnBatch(int count)
+        {
+            Vector2 player = target.position;
+            for (int i = 0; i < count; i++) Spawn(spawnPoints.Pick(player.ToNumerics()).ToUnity());
         }
 
         private void Spawn(Vector2 position)
@@ -48,11 +58,16 @@ namespace Arena.Gameplay
             {
                 Debug.LogError($"{enemy.name}: prefab wroga nie ma komponentu {nameof(EnemyAgent)}.", enemy);
                 Destroy(instance);
+                director.EnemyDied(); // fala liczy go jako żywego — inaczej nigdy by się nie skończyła
                 return;
             }
-            agent.Init(enemy, target, random);
+            agent.Init(enemy, target, random, director.SpeedBonus);
             EnemyDefinition killed = enemy;
-            agent.Health.Died += () => EnemyKilled?.Invoke(killed);
+            agent.Health.Died += () =>
+            {
+                director.EnemyDied();
+                EnemyKilled?.Invoke(killed);
+            };
         }
     }
 }

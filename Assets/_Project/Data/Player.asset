@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20947c044e58ef46aa6903bb535c5c2, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: Arena.Data::Arena.Data.PlayerDefinition
-  moveSpeed: 6
+  moveSpeed: 9
+  maxHealth: 5
+  invulnerabilityDuration: 1

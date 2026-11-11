@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb292cb2659b9d4195ecaf242cb991f, type: 3}
+  m_Name: Waves
+  m_EditorClassIdentifier: Arena.Data::Arena.Data.WaveConfig
+  baseEnemy: {fileID: 11400000, guid: 1af1038b4c899a34f81b20ce9313e19e, type: 2}
+  breakDuration: 3
+  firstWaveCount: 6
+  extraEnemiesPerWave: 4
+  startInterval: 1.5
+  intervalMultiplierPerWave: 0.9
+  minInterval: 0.4
+  wavesPerBatchGrowth: 2
+  maxBatchSize: 4
+  wavesPerSpeedUp: 3
+  speedBonusPerSpeedUp: 0.6
+  startWave: 1

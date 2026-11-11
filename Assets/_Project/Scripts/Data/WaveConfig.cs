@@ -15,6 +15,8 @@ namespace Arena.Data
         [Range(0f, 1f)] public float chance = 0.15f;
         [Tooltip("Najwyżej tylu na falę. 0 = bez limitu.")]
         [Min(0)] public int maxPerWave;
+        [Tooltip("Limit rośnie o 1 co tyle fal od „fromWave”. 0 = limit stały.")]
+        [Min(0)] public int maxGrowthEveryWaves;
     }
 
     // Krzywa fal w jednym pliku danych (Data/Waves.asset). Balans = edycja tego pliku, nie kodu.
@@ -58,7 +60,8 @@ namespace Arena.Data
             var rules = new List<MixInRule<EnemyDefinition>>();
             foreach (EnemyMixIn mixIn in mixIns)
                 if (mixIn.enemy != null)
-                    rules.Add(new MixInRule<EnemyDefinition>(mixIn.enemy, mixIn.fromWave, mixIn.chance, mixIn.maxPerWave));
+                    rules.Add(new MixInRule<EnemyDefinition>(
+                        mixIn.enemy, mixIn.fromWave, mixIn.chance, mixIn.maxPerWave, mixIn.maxGrowthEveryWaves));
             return rules;
         }
 

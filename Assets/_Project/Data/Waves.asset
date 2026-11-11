@@ -28,8 +28,10 @@ MonoBehaviour:
     fromWave: 5
     chance: 1
     maxPerWave: 1
+    maxGrowthEveryWaves: 0
   - enemy: {fileID: 11400000, guid: 62f8590ad23d3c942b7d5177b0cc22e9, type: 2}
     fromWave: 3
     chance: 0.15
-    maxPerWave: 0
+    maxPerWave: 1
+    maxGrowthEveryWaves: 4
   startWave: 1

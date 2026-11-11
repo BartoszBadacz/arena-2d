@@ -118,6 +118,29 @@ namespace Arena.Core.Tests
         }
 
         [Test]
+        public void MaxGrowsEveryFewWaves()
+        {
+            var rule = new MixInRule<string>(Runner, fromWave: 3, chance: 1f, maxPerWave: 1, maxGrowthEveryWaves: 4);
+
+            Assert.AreEqual(1, rule.MaxFor(3));
+            Assert.AreEqual(1, rule.MaxFor(6));
+            Assert.AreEqual(2, rule.MaxFor(7));
+            Assert.AreEqual(3, rule.MaxFor(11));
+        }
+
+        [Test]
+        public void GrowingMax_IsUsedByMixer()
+        {
+            var mixer = Mixer(new MixInRule<string>(Runner, fromWave: 3, chance: 1f, maxPerWave: 1, maxGrowthEveryWaves: 4));
+
+            mixer.StartWave(wave: 3, size: 13);
+            Assert.AreEqual(1, Count(mixer, Runner));
+
+            mixer.StartWave(wave: 7, size: 28);
+            Assert.AreEqual(2, Count(mixer, Runner));
+        }
+
+        [Test]
         public void ChanceOutsideRange_Throws()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new MixInRule<string>(Tank, fromWave: 1, chance: 1.5f));

@@ -5,8 +5,9 @@ namespace Arena.Data
     // Jak wróg porusza się względem gracza.
     public enum EnemyBehavior
     {
-        Chase, // goni gracza
-        Flee,  // ucieka przed graczem — trzeba go dopaść
+        Chase,       // goni gracza
+        Flee,        // ucieka przed graczem — trzeba go dopaść
+        HideInCrowd, // chowa się przy losowym innym wrogu, co chwilę zmienia kryjówkę (bez innych wrogów: ucieka)
     }
 
     // Typ wroga jako plik danych (Data/Slime.asset, później Runner.asset, Tank.asset).
@@ -18,6 +19,8 @@ namespace Arena.Data
         [SerializeField] private GameObject prefab;
 
         [SerializeField] private EnemyBehavior behavior = EnemyBehavior.Chase;
+        [Tooltip("HideInCrowd: co ile sekund losuje nową kryjówkę.")]
+        [SerializeField, Min(0.1f)] private float retargetInterval = 2.5f;
         [SerializeField, Min(1)] private int maxHealth = 3;
         [SerializeField, Min(0f)] private float speed = 3f;
         [Tooltip("Obrażenia zadawane graczowi przy kontakcie.")]
@@ -34,6 +37,7 @@ namespace Arena.Data
 
         public GameObject Prefab => prefab;
         public EnemyBehavior Behavior => behavior;
+        public float RetargetInterval => retargetInterval;
         public int ScoreValue => scoreValue;
         public int HealOnKill => healOnKill;
         public int MaxHealth => maxHealth;

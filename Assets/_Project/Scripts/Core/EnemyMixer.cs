@@ -43,7 +43,8 @@ namespace Arena.Core
             for (int i = 0; i < rules.Count; i++)
             {
                 MixInRule<TKind> rule = rules[i];
-                bool active = wave >= rule.FromWave && (rule.MaxPerWave == 0 || usedThisWave[i] < rule.MaxPerWave);
+                int max = rule.MaxFor(wave);
+                bool active = wave >= rule.FromWave && (max == 0 || usedThisWave[i] < max);
                 if (!active || random.NextDouble() >= rule.Chance) continue;
 
                 usedThisWave[i]++;

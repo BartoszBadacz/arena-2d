@@ -6,7 +6,8 @@ using UnityEngine;
 namespace Arena.Gameplay
 {
     // Wróg: cienki klej. Pyta fizykę o sąsiadów, kierunek liczy Steering (Core), życie trzyma Health (Core).
-    // Zachowanie z danych: Chase goni gracza, Flee ucieka i ślizga się wzdłuż krawędzi areny (KeepInside).
+    // Zachowanie z danych: Chase goni gracza, Flee ucieka i ślizga się wzdłuż krawędzi areny (KeepInside),
+    // HideInCrowd biegnie do losowego innego wroga i co chwilę zmienia kryjówkę (TargetSwitcher z Core).
     // Tworzy go spawner i od razu wywołuje Init — przed pierwszym FixedUpdate.
     [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyAgent : MonoBehaviour, IHasHealth
@@ -16,10 +17,10 @@ namespace Arena.Gameplay
         private static readonly System.Numerics.Vector2[] NeighbourPositions = new System.Numerics.Vector2[32];
 
         private EnemyDefinition definition;
-        private Transform target;
-        private System.Random random;
+        private EnemyContext context;
         private float speed;
-        private System.Numerics.Vector2 arenaHalfSize;
+        private TargetSwitcher<EnemyAgent> cover;
+        private Func<EnemyAgent, bool> isValidCover;
         private Rigidbody2D body;
         private ContactFilter2D neighbourFilter;
 
@@ -27,16 +28,15 @@ namespace Arena.Gameplay
         public EnemyDefinition Definition => definition;
 
         // speedBonus: przyspieszenie od fali (WaveDirector.SpeedBonus), dodawane do prędkości z definicji.
-        public void Init(EnemyDefinition definition, Transform target, System.Random random,
-                         System.Numerics.Vector2 arenaHalfSize, float speedBonus = 0f)
+        public void Init(EnemyDefinition definition, EnemyContext context, float speedBonus = 0f)
         {
             this.definition = definition;
-            this.target = target;
-            this.random = random;
-            this.arenaHalfSize = arenaHalfSize;
+            this.context = context;
             speed = definition.Speed + speedBonus;
             Health = new Health(definition.MaxHealth);
             Health.Died += OnDied;
+            if (definition.Behavior == EnemyBehavior.HideInCrowd)
+                cover = new TargetSwitcher<EnemyAgent>(definition.RetargetInterval, context.Random);
         }
 
         private void Awake()
@@ -45,6 +45,9 @@ namespace Arena.Gameplay
             // Sąsiedzi = tylko obiekty z tej samej warstwy (Enemy), bez sprawdzania typu w kodzie.
             neighbourFilter = new ContactFilter2D { useTriggers = false };
             neighbourFilter.SetLayerMask(1 << gameObject.layer);
+            // Kryjówką może być tylko żywy wróg, który goni gracza (nie inny chowający się ani uciekający).
+            isValidCover = other => other != null && other != this && !other.Health.IsDead
+                                    && other.Definition.Behavior == EnemyBehavior.Chase;
         }
 
         private void Start()
@@ -56,16 +59,34 @@ namespace Arena.Gameplay
 
         private void FixedUpdate()
         {
-            if (target == null) { body.linearVelocity = Vector2.zero; return; }
+            if (context.Player == null) { body.linearVelocity = Vector2.zero; return; }
 
             System.Numerics.Vector2 self = body.position.ToNumerics();
-            System.Numerics.Vector2 separation = Steering.Separation(self, Neighbours(), definition.SeparationRadius, random);
-            System.Numerics.Vector2 player = ((Vector2)target.position).ToNumerics();
-            System.Numerics.Vector2 velocity = definition.Behavior == EnemyBehavior.Flee
-                ? Steering.KeepInside(self, Steering.Flee(self, player, separation, definition.SeparationStrength, speed), arenaHalfSize)
-                : Steering.Chase(self, player, separation, definition.SeparationStrength, speed);
+            System.Numerics.Vector2 separation =
+                Steering.Separation(self, Neighbours(), definition.SeparationRadius, context.Random);
+            System.Numerics.Vector2 player = ((Vector2)context.Player.position).ToNumerics();
+
+            System.Numerics.Vector2 velocity = definition.Behavior switch
+            {
+                EnemyBehavior.Flee => Steering.KeepInside(self, FleeFrom(self, player, separation), context.ArenaHalfSize),
+                EnemyBehavior.HideInCrowd => Steering.KeepInside(self, HideVelocity(self, player, separation), context.ArenaHalfSize),
+                _ => Steering.Chase(self, player, separation, definition.SeparationStrength, speed),
+            };
             body.linearVelocity = velocity.ToUnity();
         }
+
+        // Do kryjówki (losowy inny wróg); bez kryjówki — ucieczka przed graczem.
+        private System.Numerics.Vector2 HideVelocity(System.Numerics.Vector2 self, System.Numerics.Vector2 player,
+                                                     System.Numerics.Vector2 separation)
+        {
+            EnemyAgent hideBehind = cover.Update(Time.time, context.Alive, isValidCover);
+            if (hideBehind == null) return FleeFrom(self, player, separation);
+            return Steering.Chase(self, hideBehind.body.position.ToNumerics(), separation, definition.SeparationStrength, speed);
+        }
+
+        private System.Numerics.Vector2 FleeFrom(System.Numerics.Vector2 self, System.Numerics.Vector2 player,
+                                                 System.Numerics.Vector2 separation) =>
+            Steering.Flee(self, player, separation, definition.SeparationStrength, speed);
 
         private ReadOnlySpan<System.Numerics.Vector2> Neighbours()
         {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Arena.Core;
 using Arena.Data;
 using UnityEngine;
@@ -17,8 +18,8 @@ namespace Arena.Gameplay
         private EnemyMixer<EnemyDefinition> mixer;
         private SpawnPointPicker spawnPoints;
         private Transform target;
-        private System.Random random;
-        private System.Numerics.Vector2 arenaHalfSize;
+        private EnemyContext context;
+        private readonly List<EnemyAgent> alive = new(); // żywi wrogowie — wśród nich chowają się HideInCrowd
 
         public void Init(WaveDirector director, EnemyMixer<EnemyDefinition> mixer, SpawnPointPicker spawnPoints,
                          Transform target, System.Random random, System.Numerics.Vector2 arenaHalfSize)
@@ -27,8 +28,7 @@ namespace Arena.Gameplay
             this.mixer = mixer;
             this.spawnPoints = spawnPoints;
             this.target = target;
-            this.random = random;
-            this.arenaHalfSize = arenaHalfSize;
+            context = new EnemyContext(target, random, arenaHalfSize, alive);
             director.SpawnRequested += SpawnBatch;
         }
 
@@ -63,9 +63,11 @@ namespace Arena.Gameplay
                 director.EnemyDied(); // fala liczy go jako żywego — inaczej nigdy by się nie skończyła
                 return;
             }
-            agent.Init(enemy, target, random, arenaHalfSize, director.SpeedBonus);
+            agent.Init(enemy, context, director.SpeedBonus);
+            alive.Add(agent);
             agent.Health.Died += () =>
             {
+                alive.Remove(agent);
                 director.EnemyDied();
                 EnemyKilled?.Invoke(enemy);
             };

@@ -5,33 +5,33 @@ namespace Arena.Core.Tests
     public class SessionRecordTests
     {
         [Test]
-        public void FirstWave_IsNewRecord()
+        public void FirstScore_IsNewRecord()
         {
             var record = new SessionRecord();
 
-            Assert.IsTrue(record.Submit(3));
-            Assert.AreEqual(3, record.BestWave);
+            Assert.IsTrue(record.Submit(120));
+            Assert.AreEqual(120, record.BestScore);
         }
 
         [Test]
-        public void LowerOrEqualWave_IsNotRecord()
+        public void LowerOrEqualScore_IsNotRecord()
         {
             var record = new SessionRecord();
-            record.Submit(5);
+            record.Submit(500);
 
-            Assert.IsFalse(record.Submit(4));
-            Assert.IsFalse(record.Submit(5));
-            Assert.AreEqual(5, record.BestWave);
+            Assert.IsFalse(record.Submit(400));
+            Assert.IsFalse(record.Submit(500));
+            Assert.AreEqual(500, record.BestScore);
         }
 
         [Test]
-        public void HigherWave_BeatsRecord()
+        public void HigherScore_BeatsRecord()
         {
             var record = new SessionRecord();
-            record.Submit(5);
+            record.Submit(500);
 
-            Assert.IsTrue(record.Submit(6));
-            Assert.AreEqual(6, record.BestWave);
+            Assert.IsTrue(record.Submit(510));
+            Assert.AreEqual(510, record.BestScore);
         }
     }
 }

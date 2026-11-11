@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Arena.Gameplay
 {
     // Wróg: cienki klej. Pyta fizykę o sąsiadów, kierunek liczy Steering (Core), życie trzyma Health (Core).
+    // Zachowanie z danych: Chase goni gracza, Flee ucieka i ślizga się wzdłuż krawędzi areny (KeepInside).
     // Tworzy go spawner i od razu wywołuje Init — przed pierwszym FixedUpdate.
     [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyAgent : MonoBehaviour, IHasHealth
@@ -18,6 +19,7 @@ namespace Arena.Gameplay
         private Transform target;
         private System.Random random;
         private float speed;
+        private System.Numerics.Vector2 arenaHalfSize;
         private Rigidbody2D body;
         private ContactFilter2D neighbourFilter;
 
@@ -25,11 +27,13 @@ namespace Arena.Gameplay
         public EnemyDefinition Definition => definition;
 
         // speedBonus: przyspieszenie od fali (WaveDirector.SpeedBonus), dodawane do prędkości z definicji.
-        public void Init(EnemyDefinition definition, Transform target, System.Random random, float speedBonus = 0f)
+        public void Init(EnemyDefinition definition, Transform target, System.Random random,
+                         System.Numerics.Vector2 arenaHalfSize, float speedBonus = 0f)
         {
             this.definition = definition;
             this.target = target;
             this.random = random;
+            this.arenaHalfSize = arenaHalfSize;
             speed = definition.Speed + speedBonus;
             Health = new Health(definition.MaxHealth);
             Health.Died += OnDied;
@@ -56,8 +60,10 @@ namespace Arena.Gameplay
 
             System.Numerics.Vector2 self = body.position.ToNumerics();
             System.Numerics.Vector2 separation = Steering.Separation(self, Neighbours(), definition.SeparationRadius, random);
-            System.Numerics.Vector2 velocity = Steering.Chase(
-                self, ((Vector2)target.position).ToNumerics(), separation, definition.SeparationStrength, speed);
+            System.Numerics.Vector2 player = ((Vector2)target.position).ToNumerics();
+            System.Numerics.Vector2 velocity = definition.Behavior == EnemyBehavior.Flee
+                ? Steering.KeepInside(self, Steering.Flee(self, player, separation, definition.SeparationStrength, speed), arenaHalfSize)
+                : Steering.Chase(self, player, separation, definition.SeparationStrength, speed);
             body.linearVelocity = velocity.ToUnity();
         }
 

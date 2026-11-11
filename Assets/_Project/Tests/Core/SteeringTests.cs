@@ -79,6 +79,54 @@ namespace Arena.Core.Tests
         }
 
         [Test]
+        public void Flee_MovesAwayFromThreatAtSpeed()
+        {
+            Vector2 velocity = Steering.Flee(Vector2.Zero, new Vector2(0f, 10f), Vector2.Zero, separationStrength: 3f, speed: 5f);
+
+            Assert.AreEqual(0f, velocity.X, Tolerance);
+            Assert.AreEqual(-5f, velocity.Y, Tolerance);
+        }
+
+        [Test]
+        public void KeepInside_InsideArena_LeavesVelocityAlone()
+        {
+            var halfSize = new Vector2(13f, 7f);
+            var velocity = new Vector2(3f, 4f);
+
+            Assert.AreEqual(velocity, Steering.KeepInside(new Vector2(0f, 0f), velocity, halfSize));
+        }
+
+        [Test]
+        public void KeepInside_AtWall_SlidesAlongItAtFullSpeed()
+        {
+            var halfSize = new Vector2(13f, 7f);
+
+            Vector2 velocity = Steering.KeepInside(new Vector2(13f, 0f), new Vector2(4f, 3f), halfSize);
+
+            Assert.AreEqual(0f, velocity.X, Tolerance);
+            Assert.AreEqual(5f, velocity.Y, Tolerance);
+        }
+
+        [Test]
+        public void KeepInside_InCornerFacingOut_Stops()
+        {
+            var halfSize = new Vector2(13f, 7f);
+
+            Vector2 velocity = Steering.KeepInside(new Vector2(13f, 7f), new Vector2(4f, 3f), halfSize);
+
+            Assert.AreEqual(Vector2.Zero, velocity);
+        }
+
+        [Test]
+        public void KeepInside_AtWallMovingInward_IsUnchanged()
+        {
+            var halfSize = new Vector2(13f, 7f);
+            var velocity = new Vector2(-4f, 3f);
+
+            Assert.AreEqual(velocity, Steering.KeepInside(new Vector2(13f, 0f), velocity, halfSize));
+        }
+
+        [Test]
         public void Chase_OnTopOfTarget_StandsStillInsteadOfNaN()
         {
             Vector2 velocity = Steering.Chase(Vector2.One, Vector2.One, Vector2.Zero, separationStrength: 3f, speed: 3f);

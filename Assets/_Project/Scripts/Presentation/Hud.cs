@@ -29,6 +29,7 @@ namespace Arena.Presentation
         private Label healthLabel;
         private Label waveLabel;
         private Label enemiesLabel;
+        private Label scoreLabel;
         private Label killsLabel;
         private Label timeLabel;
         private Label recordLabel;
@@ -36,6 +37,7 @@ namespace Arena.Presentation
         private Label bannerTitle;
         private Label bannerSubtitle;
         private VisualElement gameOverPanel;
+        private Label scoreResultLabel;
         private Label summaryLabel;
         private Label recordResultLabel;
 
@@ -45,9 +47,10 @@ namespace Arena.Presentation
         private int shownHealth = -1;
         private int shownWave = -1;
         private int shownEnemies = -1;
+        private int shownScore = -1;
         private int shownKills = -1;
         private int shownSeconds = -1;
-        private int shownBestWave = -1;
+        private int shownBestScore = -1;
         private BannerMode shownBanner = BannerMode.Hidden;
         private int shownBannerWave = -1;
         private int shownBreakSeconds = -1;
@@ -77,6 +80,7 @@ namespace Arena.Presentation
             healthLabel = root.Q<Label>("healthLabel");
             waveLabel = root.Q<Label>("waveLabel");
             enemiesLabel = root.Q<Label>("enemiesLabel");
+            scoreLabel = root.Q<Label>("scoreLabel");
             killsLabel = root.Q<Label>("killsLabel");
             timeLabel = root.Q<Label>("timeLabel");
             recordLabel = root.Q<Label>("recordLabel");
@@ -84,6 +88,7 @@ namespace Arena.Presentation
             bannerTitle = root.Q<Label>("bannerTitle");
             bannerSubtitle = root.Q<Label>("bannerSubtitle");
             gameOverPanel = root.Q("gameOverPanel");
+            scoreResultLabel = root.Q<Label>("scoreResultLabel");
             summaryLabel = root.Q<Label>("summaryLabel");
             recordResultLabel = root.Q<Label>("recordResultLabel");
         }
@@ -119,6 +124,11 @@ namespace Arena.Presentation
                 shownEnemies = waves.EnemiesRemaining;
                 enemiesLabel.text = $"Wrogowie: {shownEnemies}";
             }
+            if (stats.Score != shownScore)
+            {
+                shownScore = stats.Score;
+                scoreLabel.text = $"Punkty: {shownScore}";
+            }
             if (stats.Kills != shownKills)
             {
                 shownKills = stats.Kills;
@@ -130,10 +140,10 @@ namespace Arena.Presentation
                 shownSeconds = seconds;
                 timeLabel.text = $"Czas: {shownSeconds} s";
             }
-            if (record.BestWave != shownBestWave)
+            if (record.BestScore != shownBestScore)
             {
-                shownBestWave = record.BestWave;
-                recordLabel.text = $"Rekord: fala {shownBestWave}";
+                shownBestScore = record.BestScore;
+                recordLabel.text = $"Rekord: {shownBestScore}";
             }
         }
 
@@ -172,8 +182,9 @@ namespace Arena.Presentation
 
         private void ShowGameOver(RunResult result)
         {
+            scoreResultLabel.text = $"Punkty: {result.Score}";
             summaryLabel.text = $"Fala: {result.Wave}   Zabici: {result.Kills}   Czas: {result.SurvivedTime:0} s";
-            recordResultLabel.text = result.IsNewRecord ? "NOWY REKORD!" : $"Rekord: fala {result.BestWave}";
+            recordResultLabel.text = result.IsNewRecord ? "NOWY REKORD!" : $"Rekord: {result.BestScore}";
             recordResultLabel.EnableInClassList(RecordClass, result.IsNewRecord);
             gameOverPanel.RemoveFromClassList(HiddenGameOverClass);
         }

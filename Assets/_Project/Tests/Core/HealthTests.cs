@@ -64,6 +64,41 @@ namespace Arena.Core.Tests
         }
 
         [Test]
+        public void Heal_AddsLifeAndRaisesHealed()
+        {
+            var health = new Health(max: 5);
+            health.TakeDamage(2, now: 0f);
+            int healedCount = 0;
+            health.Healed += () => healedCount++;
+
+            Assert.IsTrue(health.Heal(1));
+            Assert.AreEqual(4, health.Current);
+            Assert.AreEqual(1, healedCount);
+        }
+
+        [Test]
+        public void Heal_StopsAtMax()
+        {
+            var health = new Health(max: 5);
+            health.TakeDamage(1, now: 0f);
+
+            health.Heal(3);
+
+            Assert.AreEqual(5, health.Current);
+            Assert.IsFalse(health.Heal(1)); // pełne — nic się nie dzieje
+        }
+
+        [Test]
+        public void Heal_DoesNotReviveDead()
+        {
+            var health = new Health(max: 1);
+            health.TakeDamage(1, now: 0f);
+
+            Assert.IsFalse(health.Heal(1));
+            Assert.IsTrue(health.IsDead);
+        }
+
+        [Test]
         public void NonPositiveMax_Throws()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new Health(max: 0));

@@ -63,6 +63,13 @@
     color: rgb(255, 255, 255);
 }
 
+.game-over__score {
+    margin-bottom: 12px;
+    font-size: 40px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+}
+
 .game-over__line {
     margin-bottom: 8px;
     font-size: 28px;

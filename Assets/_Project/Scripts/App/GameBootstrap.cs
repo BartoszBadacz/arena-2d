@@ -42,19 +42,23 @@ namespace Arena.App
             var session = new RunSession(playerHealth, stats, sessionRecord);
             var waves = new WaveDirector(waveConfig.ToSettings());
             var mixer = new EnemyMixer<EnemyDefinition>(waveConfig.BaseEnemy, waveConfig.ToMixInRules(), random);
-            var spawnPoints = new SpawnPointPicker(
-                new System.Numerics.Vector2(arenaConfig.HalfSize.x, arenaConfig.HalfSize.y), arenaConfig.MinSpawnDistance, random);
+            var arenaHalfSize = new System.Numerics.Vector2(arenaConfig.HalfSize.x, arenaConfig.HalfSize.y);
+            var spawnPoints = new SpawnPointPicker(arenaHalfSize, arenaConfig.MinSpawnDistance, random);
 
             // Fakty → logika
             waves.WaveStarted += stats.ReachWave;
             waves.WaveStarted += wave => mixer.StartWave(wave, waves.WaveSize); // skład fali przed pierwszym spawnem
-            enemySpawner.EnemyKilled += _ => stats.RegisterKill();
+            enemySpawner.EnemyKilled += enemy =>
+            {
+                stats.RegisterKill(enemy.ScoreValue);
+                playerHealth.Heal(enemy.HealOnKill);
+            };
 
             // Wstrzyknięcie do obiektów sceny
             playerMover.Init(playerDefinition);
             playerShooter.Init(weapon, weaponDefinition, mainCamera);
             playerBody.Init(playerHealth);
-            enemySpawner.Init(waves, mixer, spawnPoints, playerMover.transform, random);
+            enemySpawner.Init(waves, mixer, spawnPoints, playerMover.transform, random, arenaHalfSize);
             runFlow.Init(session);
             hud.Init(playerHealth, stats, sessionRecord, session, waves);
         }

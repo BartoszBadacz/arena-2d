@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Runner
   m_EditorClassIdentifier: Arena.Data::Arena.Data.EnemyDefinition
   prefab: {fileID: 7753221314641871259, guid: 962f4dbd48d7b6441906fd4718d69c4a, type: 3}
+  behavior: 1
   maxHealth: 1
   speed: 5
-  contactDamage: 1
+  contactDamage: 0
+  scoreValue: 10
+  healOnKill: 1
   separationRadius: 2
   separationStrength: 3

@@ -29,11 +29,21 @@ namespace Arena.Core.Tests
         }
 
         [Test]
+        public void Kills_AddPointsAndCount()
+        {
+            stats.RegisterKill(10);
+            stats.RegisterKill(50);
+
+            Assert.AreEqual(2, stats.Kills);
+            Assert.AreEqual(60, stats.Score);
+        }
+
+        [Test]
         public void PlayerDeath_RaisesGameOverOnceWithSnapshot()
         {
             stats.ReachWave(4);
-            stats.RegisterKill();
-            stats.RegisterKill();
+            stats.RegisterKill(10);
+            stats.RegisterKill(50);
             session.Tick(12f);
             int gameOverCount = 0;
             RunResult received = null;
@@ -44,11 +54,12 @@ namespace Arena.Core.Tests
 
             Assert.IsTrue(session.IsOver);
             Assert.AreEqual(1, gameOverCount);
+            Assert.AreEqual(60, received.Score);
             Assert.AreEqual(4, received.Wave);
             Assert.AreEqual(2, received.Kills);
             Assert.AreEqual(12f, received.SurvivedTime, 0.0001f);
             Assert.IsTrue(received.IsNewRecord);
-            Assert.AreEqual(4, received.BestWave);
+            Assert.AreEqual(60, received.BestScore);
         }
 
         [Test]
@@ -63,15 +74,15 @@ namespace Arena.Core.Tests
         }
 
         [Test]
-        public void WaveBelowRecord_IsNotNewRecord()
+        public void ScoreBelowRecord_IsNotNewRecord()
         {
-            record.Submit(10);
-            stats.ReachWave(4);
+            record.Submit(1000);
+            stats.RegisterKill(10);
 
             playerHealth.TakeDamage(1, now: 0f);
 
             Assert.IsFalse(session.Result.IsNewRecord);
-            Assert.AreEqual(10, session.Result.BestWave);
+            Assert.AreEqual(1000, session.Result.BestScore);
         }
     }
 }

@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Slime
   m_EditorClassIdentifier: Arena.Data::Arena.Data.EnemyDefinition
   prefab: {fileID: 3945623888370670406, guid: bc752221badd5fe499717e9c634dd6ef, type: 3}
+  behavior: 0
   maxHealth: 3
   speed: 3
   contactDamage: 1
+  scoreValue: 10
+  healOnKill: 0
   separationRadius: 2
   separationStrength: 3

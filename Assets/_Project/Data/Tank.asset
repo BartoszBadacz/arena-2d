@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Tank
   m_EditorClassIdentifier: Arena.Data::Arena.Data.EnemyDefinition
   prefab: {fileID: 2107122332110310902, guid: 77e146ccac9766049a2aa0f4c1ed2f76, type: 3}
+  behavior: 0
   maxHealth: 10
   speed: 1.8
   contactDamage: 2
+  scoreValue: 50
+  healOnKill: 0
   separationRadius: 2.5
   separationStrength: 3

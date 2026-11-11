@@ -18,6 +18,7 @@ namespace Arena.Core
         }
 
         public event Action Damaged;
+        public event Action Healed;
         public event Action Died;
 
         public int Max { get; }
@@ -35,6 +36,16 @@ namespace Arena.Core
             invulnerableUntil = now + invulnerabilityDuration;
             Damaged?.Invoke();
             if (IsDead) Died?.Invoke();
+            return true;
+        }
+
+        // true = życia przybyło. Najwyżej do pełnego; martwego nie wskrzesza.
+        public bool Heal(int amount)
+        {
+            if (amount <= 0 || IsDead || Current == Max) return false;
+
+            Current = Math.Min(Max, Current + amount);
+            Healed?.Invoke();
             return true;
         }
     }

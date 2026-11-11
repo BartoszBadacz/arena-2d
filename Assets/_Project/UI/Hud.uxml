@@ -5,9 +5,10 @@
             <ui:Label name="healthLabel" class="hud__stat" text="HP: 5/5" />
             <ui:Label name="waveLabel" class="hud__stat" text="Fala: 0" />
             <ui:Label name="enemiesLabel" class="hud__stat" text="Wrogowie: 0" />
+            <ui:Label name="scoreLabel" class="hud__stat" text="Punkty: 0" />
             <ui:Label name="killsLabel" class="hud__stat" text="Zabici: 0" />
             <ui:Label name="timeLabel" class="hud__stat" text="Czas: 0 s" />
-            <ui:Label name="recordLabel" class="hud__stat" text="Rekord: fala 0" />
+            <ui:Label name="recordLabel" class="hud__stat" text="Rekord: 0" />
         </ui:VisualElement>
         <ui:VisualElement name="banner" class="banner banner--hidden" picking-mode="Ignore">
             <ui:Label name="bannerTitle" class="banner__title" text="FALA 1" />
@@ -15,8 +16,9 @@
         </ui:VisualElement>
         <ui:VisualElement name="gameOverPanel" class="game-over game-over--hidden" picking-mode="Ignore">
             <ui:Label class="game-over__title" text="GAME OVER" />
+            <ui:Label name="scoreResultLabel" class="game-over__score" text="Punkty: 0" />
             <ui:Label name="summaryLabel" class="game-over__line" text="Fala: 0   Zabici: 0   Czas: 0 s" />
-            <ui:Label name="recordResultLabel" class="game-over__line" text="Rekord: fala 0" />
+            <ui:Label name="recordResultLabel" class="game-over__line" text="Rekord: 0" />
             <ui:Label class="game-over__hint" text="R — restart" />
         </ui:VisualElement>
     </ui:VisualElement>

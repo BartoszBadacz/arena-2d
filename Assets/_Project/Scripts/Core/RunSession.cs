@@ -30,8 +30,8 @@ namespace Arena.Core
         private void End()
         {
             if (IsOver) return;
-            bool isNewRecord = record.Submit(stats.Wave);
-            Result = new RunResult(stats.Wave, stats.Kills, stats.SurvivedTime, isNewRecord, record.BestWave);
+            bool isNewRecord = record.Submit(stats.Score);
+            Result = new RunResult(stats.Score, stats.Wave, stats.Kills, stats.SurvivedTime, isNewRecord, record.BestScore);
             GameOver?.Invoke(Result);
         }
     }

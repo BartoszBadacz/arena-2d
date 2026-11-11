@@ -33,6 +33,24 @@ namespace Arena.Core
             return NormalizeOrZero(toTarget + separation * separationStrength) * speed;
         }
 
+        // Ucieczka: kierunek od zagrożenia skorygowany separacją, zawsze o długości speed (albo zero).
+        public static Vector2 Flee(Vector2 self, Vector2 threat, Vector2 separation, float separationStrength, float speed)
+        {
+            Vector2 awayFromThreat = NormalizeOrZero(self - threat);
+            return NormalizeOrZero(awayFromThreat + separation * separationStrength) * speed;
+        }
+
+        // Przy krawędzi areny: usuwa składową „na zewnątrz” i zachowuje prędkość — uciekający ślizga się wzdłuż ściany
+        // zamiast się w nią wbijać (wtedy tarcie zatrzymałoby go w miejscu). W rogu zostaje zero: da się go zagonić.
+        public static Vector2 KeepInside(Vector2 position, Vector2 velocity, Vector2 halfSize)
+        {
+            float speed = velocity.Length();
+            float x = velocity.X, y = velocity.Y;
+            if ((position.X >= halfSize.X && x > 0f) || (position.X <= -halfSize.X && x < 0f)) x = 0f;
+            if ((position.Y >= halfSize.Y && y > 0f) || (position.Y <= -halfSize.Y && y < 0f)) y = 0f;
+            return NormalizeOrZero(new Vector2(x, y)) * speed;
+        }
+
         // Vector2.Normalize(zero) daje NaN — a wróg stojący dokładnie na graczu to normalna sytuacja.
         private static Vector2 NormalizeOrZero(Vector2 v)
         {

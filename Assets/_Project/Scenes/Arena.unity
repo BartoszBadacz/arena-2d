@@ -443,6 +443,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da0247fce0775c4a9a389ab11b38c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Arena.Presentation::Arena.Presentation.Hud
+--- !u!114 &1671286331 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8984602614981624339, guid: 19195ff55a624ad469a75464bb3b0f28, type: 3}
+  m_PrefabInstance: {fileID: 1671286329}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1aa2da1b325a3b4abc9bbe44f0a7dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Arena.Presentation::Arena.Presentation.StartScreen
 --- !u!1 &1820721505
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +538,7 @@ MonoBehaviour:
   enemySpawner: {fileID: 1820721506}
   runFlow: {fileID: 733424523}
   hud: {fileID: 1671286330}
+  startScreen: {fileID: 1671286331}
 --- !u!4 &1840054106
 Transform:
   m_ObjectHideFlags: 0

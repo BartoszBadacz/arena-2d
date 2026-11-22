@@ -25,6 +25,18 @@ namespace Arena.Core.Tests
         }
 
         [Test]
+        public void EverySubmittedRun_IsCounted()
+        {
+            var record = new SessionRecord();
+            Assert.AreEqual(0, record.RunsPlayed);
+
+            record.Submit(500);
+            record.Submit(100); // nie rekord, ale bieg się odbył
+
+            Assert.AreEqual(2, record.RunsPlayed);
+        }
+
+        [Test]
         public void HigherScore_BeatsRecord()
         {
             var record = new SessionRecord();

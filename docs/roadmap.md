@@ -76,7 +76,7 @@ Kolejność ustalona 2026-11-11:
 ## Etap 3 — Grafika, dźwięk, szlif
 
 Minimalny szlif przed publikacją (rozpisane 2026-11-22). Kolejność od najmniej zależnych, każdy krok grywalny:
-- [ ] 1. Ekran startowy: „kliknij, aby zacząć” + sterowanie. W przeglądarce klik daje fokus ramce (klawiatura w iframe na itch.io) i odblokowuje dźwięk. Restart (R) bez ekranu startowego.
+- [x] 1. Ekran startowy: „kliknij, aby zacząć” + sterowanie. W przeglądarce klik daje fokus ramce (klawiatura w iframe na itch.io) i odblokowuje dźwięk. Restart (R) bez ekranu startowego.
 - [ ] 2. Dźwięki (Kenney, CC0) w Presentation, na istniejących zdarzeniach: strzał, trafienie i śmierć wroga, obrażenia gracza, leczenie (`Healed`), start fali, fala czysta (`WaveCleared`), Game Over
 - [ ] 3. Grafika: wybór stylu → PPU i rozmiar sprite'ów pod skalę ×0.7 (zapis w `notatki.md`) → podmiana sprite'ów w prefabach i wariantach, podłoga, ściany
 - [ ] 4. (opcjonalnie) juice: cząsteczki przy śmierci wroga, potrząsanie kamerą przy trafieniu gracza

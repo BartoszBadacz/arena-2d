@@ -29,6 +29,7 @@ namespace Arena.App
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private RunFlow runFlow;
         [SerializeField] private Hud hud;
+        [SerializeField] private StartScreen startScreen;
 
         private void Awake()
         {
@@ -61,6 +62,11 @@ namespace Arena.App
             enemySpawner.Init(waves, mixer, spawnPoints, playerMover.transform, random, arenaHalfSize);
             runFlow.Init(session);
             hud.Init(playerHealth, stats, sessionRecord, session, waves);
+            startScreen.Init(session);
+
+            // Ekran startowy tylko przy pierwszym biegu w sesji; restart (R) startuje od razu.
+            // Na końcu, żeby wszyscy słuchacze Started byli już podpięci.
+            if (sessionRecord.RunsPlayed > 0) session.Begin();
         }
     }
 }

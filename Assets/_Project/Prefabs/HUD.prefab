@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2685241906037401202}
   - component: {fileID: 266298738223734720}
   - component: {fileID: 2676836763829785530}
+  - component: {fileID: 8984602614981624339}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -68,3 +69,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da0247fce0775c4a9a389ab11b38c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Arena.Presentation::Arena.Presentation.Hud
+  waveBannerDuration: 2
+--- !u!114 &8984602614981624339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486160711389309309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1aa2da1b325a3b4abc9bbe44f0a7dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Arena.Presentation::Arena.Presentation.StartScreen

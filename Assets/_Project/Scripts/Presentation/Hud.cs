@@ -151,7 +151,8 @@ namespace Arena.Presentation
         private void UpdateBanner()
         {
             BannerMode mode = BannerMode.Hidden;
-            if (!session.IsOver)
+            // Przed startem baner nachodziłby na ekran startowy; po Game Over — na ekran wyniku.
+            if (session.HasStarted && !session.IsOver)
             {
                 if (waves.CurrentState == WaveDirector.State.Break) mode = BannerMode.Break;
                 else if (Time.time < waveBannerUntil) mode = BannerMode.WaveStart;

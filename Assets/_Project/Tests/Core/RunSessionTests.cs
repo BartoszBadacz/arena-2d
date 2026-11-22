@@ -16,6 +16,34 @@ namespace Arena.Core.Tests
             stats = new RunStats();
             record = new SessionRecord();
             session = new RunSession(playerHealth, stats, record);
+            session.Begin(); // większość testów dotyczy trwającej gry; start osobno niżej
+        }
+
+        [Test]
+        public void BeforeBegin_TimeDoesNotFlow()
+        {
+            var waiting = new RunSession(new Health(max: 1), stats, record);
+
+            waiting.Tick(5f);
+
+            Assert.IsFalse(waiting.HasStarted);
+            Assert.AreEqual(0f, stats.SurvivedTime, 0.0001f);
+        }
+
+        [Test]
+        public void Begin_RaisesStartedOnce()
+        {
+            var waiting = new RunSession(new Health(max: 1), stats, record);
+            int startedCount = 0;
+            waiting.Started += () => startedCount++;
+
+            waiting.Begin();
+            waiting.Begin(); // drugi klik nic nie zmienia
+            waiting.Tick(2f);
+
+            Assert.IsTrue(waiting.HasStarted);
+            Assert.AreEqual(1, startedCount);
+            Assert.AreEqual(2f, stats.SurvivedTime, 0.0001f);
         }
 
         [Test]

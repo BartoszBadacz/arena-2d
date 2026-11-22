@@ -85,3 +85,42 @@
     font-size: 22px;
     color: rgb(160, 160, 175);
 }
+
+.start {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(10, 10, 15, 0.85);
+}
+
+.start--hidden {
+    display: none;
+}
+
+.start__title {
+    font-size: 96px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+}
+
+.start__subtitle {
+    margin-bottom: 40px;
+    font-size: 28px;
+    color: rgb(235, 235, 240);
+}
+
+.start__controls {
+    margin-bottom: 48px;
+    font-size: 22px;
+    color: rgb(160, 160, 175);
+}
+
+.start__cta {
+    font-size: 32px;
+    -unity-font-style: bold;
+    color: rgb(255, 216, 77);
+}

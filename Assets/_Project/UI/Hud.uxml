@@ -21,5 +21,12 @@
             <ui:Label name="recordResultLabel" class="game-over__line" text="Rekord: 0" />
             <ui:Label class="game-over__hint" text="R — restart" />
         </ui:VisualElement>
+        <!-- Ostatni w drzewie = rysowany na wierzchu. Łapie kliknięcia (brak picking-mode="Ignore"). -->
+        <ui:VisualElement name="startPanel" class="start start--hidden">
+            <ui:Label class="start__title" text="ARENA" />
+            <ui:Label class="start__subtitle" text="Przetrwaj jak najwięcej fal" />
+            <ui:Label class="start__controls" text="WASD — ruch      Mysz — celowanie i ogień      R — restart" />
+            <ui:Label class="start__cta" text="Kliknij, aby zacząć" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

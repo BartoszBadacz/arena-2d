@@ -2,7 +2,7 @@ using System;
 
 namespace Arena.Core
 {
-    // Przebieg jednej rozgrywki: trwa, dopóki gracz żyje. Śmierć gracza = Game Over:
+    // Przebieg jednej rozgrywki: czeka na start (Begin), potem trwa, dopóki gracz żyje. Śmierć gracza = Game Over:
     // zdjęcie wyniku, zgłoszenie rekordu i jedno zdarzenie GameOver dla ekranu, pauzy i restartu.
     public sealed class RunSession
     {
@@ -16,15 +16,25 @@ namespace Arena.Core
             playerHealth.Died += End;
         }
 
+        public event Action Started;
         public event Action<RunResult> GameOver;
 
+        public bool HasStarted { get; private set; }
         public bool IsOver => Result != null;
         public RunResult Result { get; private set; }
 
-        // Czas płynie tylko w trakcie gry.
+        // Start biegu: z ekranu startowego (klik) albo od razu przy restarcie. Drugi raz nic nie robi.
+        public void Begin()
+        {
+            if (HasStarted) return;
+            HasStarted = true;
+            Started?.Invoke();
+        }
+
+        // Czas płynie tylko w trakcie gry: po starcie, przed Game Over.
         public void Tick(float deltaTime)
         {
-            if (!IsOver) stats.AddTime(deltaTime);
+            if (HasStarted && !IsOver) stats.AddTime(deltaTime);
         }
 
         private void End()

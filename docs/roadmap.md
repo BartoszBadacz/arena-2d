@@ -76,7 +76,7 @@ Kolejność ustalona 2026-11-11:
 ## Etap 3 — Grafika, dźwięk, szlif
 
 Zarys (do rozpisania po próbnym buildzie):
-- skala grafiki ustalona i zapisana w `notatki.md` przed pierwszym obrazkiem (PPU, rozmiar sprite'ów). Wejście z próbnego buildu: gracz (1 j.) i wrogowie są za duzi względem areny 26×14 przy kamerze 18 j. w pionie → najpierw eksperyment z pomniejszeniem obiektów (prefaby + `separationRadius`), krótki playtest, potem zapis skali
+- skala grafiki ustalona i zapisana w `notatki.md` przed pierwszym obrazkiem (PPU, rozmiar sprite'ów). Wejście z próbnego buildu: gracz (1 j.) i wrogowie są za duzi względem areny 26×14 przy kamerze 18 j. w pionie → [x] skala gry ×0.7 przyjęta po playteście (2026-11-22, gracz 0.7 j.); zostaje dobrać PPU i rozmiar sprite'ów pod te rozmiary
 - przed itch.io: „Decompression Fallback” albo gzip (serwer itch.io może nie wysyłać nagłówka Brotli); odchudzenie buildu (nieużywane tekstury URP: film grain, SMAA) — opcjonalnie
 - grafika Kenney (CC0): gracz, 3 typy wrogów, pocisk, podłoga, ściany — podmiana sprite'ów w prefabach i wariantach
 - dźwięk w Presentation, nasłuchujący istniejących zdarzeń (`Damaged`, `EnemyKilled`, `WaveStarted`, `GameOver`)

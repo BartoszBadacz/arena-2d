@@ -62,6 +62,7 @@ Kolejność (każdy krok grywalny w Play, scena `Assets/_Project/Scenes/Arena.un
   - [x] runda 1 (2026-11-11): fale rzadsze, punkty i rekord w punktach, Runner nie atakuje i leczy +1 HP
   - [x] runda 2: Runner chowa się w tłumie, limit 1 na falę rosnący z falami; krzywa fal z malejącym przyrostem; skoki w bok „jak mucha”
   - [ ] dalej: użytkownik zbiera pomysły (balans „jeszcze do pracy”)
+  - obserwacja 2026-11-22: bieganie w kółko zbija wrogów w jedną chmarę (łatwo ograć) — kandydaci na poprawki w `notatki.md`; nie blokuje publikacji
 
 Kolejność: najpierw rdzeń w nowej architekturze, potem typy (wtedy nowy typ = nowy plik danych, nie nowy kod).
 

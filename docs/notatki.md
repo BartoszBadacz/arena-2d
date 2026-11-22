@@ -204,3 +204,17 @@ Skala zapisana przed dalszymi obrazkami. **Postacie: PPU = wysokość obrazka w 
 
 2026-11-22 · tarcie · `??` na komponencie Unity w skrypcie agenta
 `root.GetComponent<CircleCollider2D>() ?? root.AddComponent<...>()` nie dodało komponentu. `GetComponent` zwraca „udawany null” (obiekt C# z martwym obiektem silnika), a `??` sprawdza tylko prawdziwy null, więc dalej poleciał `MissingComponentException`. Przy obiektach Unity zawsze `if (x == null)`, bo operator `==` jest przez Unity przeciążony.
+
+2026-11-22 · obserwacja · Bieganie w kółko zbija wrogów w jedną chmarę (do balansu, nie ruszamy teraz)
+Playtest po grafice: gdy gracz krąży po planszy, wrogowie po pewnym czasie zbijają się w jedną chmarę za nim i łatwo ich „ograć”. Początek dalszych fal jest dobry, bo trudny, ale balans do dopracowania. Przyczyna w mechanice: każdy `Chase` celuje dokładnie w bieżącą pozycję gracza, więc wszystkie trasy zbiegają się w jeden ogon. Separacja tylko rozpycha sąsiadów, nie rozkłada ich wokół gracza. Kandydaci, gdybyśmy chcieli to ruszyć (każdy to dane albo mała zmiana w `Steering` w Core + testy):
+- pościg z wyprzedzeniem: część wrogów celuje w miejsce, gdzie gracz będzie za ~0.5–1 s (odcina drogę przy kółkach)
+- oskrzydlanie: stałe przesunięcie kątowe celu per wróg (losowane przy spawnie), więc nadchodzą z kilku stron zamiast gęsiego
+- rozrzut prędkości per wróg (np. ±10%), żeby ogon się rozciągał, zamiast iść zwartą kulą
+- spawn bliżej kierunku, w którym biegnie gracz (dziś: losowy punkt na krawędzi z minimalnym dystansem)
+- silniejsza lub szersza separacja (`separationStrength`, `separationRadius`): najtańsze, czyste strojenie danych
+
+2026-11-22 · decyzja · Build pod itch.io (Etap 3, krok 5)
+Kompresja gzip + Decompression Fallback (zamiast domyślnego Brotli bez fallbacku). Według wątków na itch.io Brotli tam nie działa. Fallback wbudowuje dekompresor w loader (pliki `.unityweb`), więc gra startuje także wtedy, gdy serwer nie wyśle `Content-Encoding`. Ramka strony 960×540 (16:9, jak kamera) zamiast 960×600. Koszt: 18 MB zamiast 13 MB (`.wasm` 12,7 MB w gzipie wobec 8,9 MB w Brotli). Build w 7 min (pierwszy 13 min). Test najgorszego przypadku: `python -m http.server` (bez nagłówka `Content-Encoding`) zamiast `unity build run` (ten wysyła poprawne nagłówki, więc niczego by nie sprawdził). Paczka dla itch.io: `Builds/arena-itch.zip` (`index.html` w korzeniu).
+
+2026-11-22 · tarcie · Build WebGL przy otwartym edytorze i pakowanie ZIP
+(1) `unity build --profile` odmawia, gdy projekt jest otwarty w edytorze („already open in a running Editor”). Przez otwarty edytor buduje tylko `--target`, a WebGL wymaga profilu. Obejście: `script eval --timeout 2400` z `BuildPipeline.BuildPlayer(new BuildPlayerWithProfileOptions { buildProfile = ..., locationPathName = "Builds/WebGL" })`, który zwraca `BuildReport` (wynik, czas, rozmiar, błędy). (2) `Compress-Archive` z Windows PowerShell 5 zapisuje w ZIP-ie ścieżki z `\` (`Build\WebGL.loader.js`). itch.io i inne narzędzia rozpakowałyby to jako płaskie pliki z ukośnikiem w nazwie, więc gra by nie wystartowała. Pakować `zipfile` z Pythona (ścieżki z `/`) i sprawdzać `unzip -l`.

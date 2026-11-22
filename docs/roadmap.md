@@ -94,10 +94,10 @@ Notatki wejściowe:
 ## Etap 4 — Publikacja na itch.io (WebGL/WebGPU)
 
 Rozpisane 2026-11-22. Wgrywa użytkownik (jego konto); agent przygotowuje paczkę, teksty i zrzuty.
-- [ ] 1. Strona gry jako szkic (Draft / Restricted): rodzaj HTML, upload `Builds/arena-itch.zip`, „played in the browser”, ramka 960×540, przycisk pełnego ekranu
-- [ ] 2. Test na itch.io w Chrome: ładowanie, klik startowy, klawiatura w ramce, dźwięk, pełny ekran
-- [ ] 3. Treść strony: tytuł, opis, sterowanie, tagi, podziękowania dla Kenney (CC0), zrzuty ekranu; okładka (630×500) — opcjonalnie z Higgsfield
-- [ ] 4. Publikacja (Public) + wpis w `notatki.md`: co poszło gładko, co tarło — materiał na proces przy grze nr 2
+- [x] 1. Strona gry jako szkic (Draft / Restricted): rodzaj HTML, upload `Builds/arena-itch.zip`, „played in the browser”, ramka 960×540, przycisk pełnego ekranu
+- [x] 2. Test na itch.io w Chrome: ładowanie, klik startowy, klawiatura w ramce, dźwięk, pełny ekran → działa, dźwięk gra (2026-11-22)
+- [~] 3. Treść strony (teksty PL/EN zaproponowane, zrzuty w `docs/itch/`; okładka nie): tytuł, opis, sterowanie, tagi, podziękowania dla Kenney (CC0), zrzuty ekranu; okładka (630×500) — opcjonalnie z Higgsfield
+- [ ] 4. **Odłożone decyzją użytkownika (2026-11-22): gra zostaje w widoczności ograniczonej (Restricted) — „test nie jest wart upubliczniania”.** Publikacja (Public) + wpis w `notatki.md`: co poszło gładko, co tarło — materiał na proces przy grze nr 2
 
 ## Może kiedyś
 

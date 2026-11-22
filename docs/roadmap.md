@@ -77,8 +77,8 @@ Kolejność ustalona 2026-11-11:
 
 Minimalny szlif przed publikacją (rozpisane 2026-11-22). Kolejność od najmniej zależnych, każdy krok grywalny:
 - [x] 1. Ekran startowy: „kliknij, aby zacząć” + sterowanie. W przeglądarce klik daje fokus ramce (klawiatura w iframe na itch.io) i odblokowuje dźwięk. Restart (R) bez ekranu startowego.
-- [ ] 2. Dźwięki (Kenney, CC0) w Presentation, na istniejących zdarzeniach: strzał, trafienie i śmierć wroga, obrażenia gracza, leczenie (`Healed`), start fali, fala czysta (`WaveCleared`), Game Over
-- [ ] 3. Grafika: wybór stylu → PPU i rozmiar sprite'ów pod skalę ×0.7 (zapis w `notatki.md`) → podmiana sprite'ów w prefabach i wariantach, podłoga, ściany
+- [x] 2. Dźwięki (Kenney, CC0) w Presentation, na istniejących zdarzeniach: strzał, trafienie i śmierć wroga, obrażenia gracza, leczenie (`Healed`), start fali, fala czysta (`WaveCleared`), Game Over
+- [ ] 3. Grafika: styl wybrany — Kenney Top-down Shooter, zombie (2026-11-22) → PPU i rozmiar sprite'ów pod skalę ×0.7 (zapis w `notatki.md`) → podmiana sprite'ów w prefabach i wariantach, podłoga, ściany
 - [ ] 4. (opcjonalnie) juice: cząsteczki przy śmierci wroga, potrząsanie kamerą przy trafieniu gracza
 - [ ] 5. Build pod itch.io: Decompression Fallback (albo gzip), ewentualnie odchudzenie z nieużywanych tekstur URP
 

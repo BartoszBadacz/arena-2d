@@ -13,6 +13,8 @@ namespace Arena.Gameplay
         // Wrogowie powstają w trakcie gry, więc nikt nie podepnie się do każdego z osobna.
         // Spawner słucha śmierci każdego, kogo stworzył, i ogłasza jedno wspólne zdarzenie (jak rodzic zbierający @Output dzieci).
         public event Action<EnemyDefinition> EnemyKilled;
+        // Trafienie, które nie zabiło — przy zabiciu jest tylko EnemyKilled (bez dwóch dźwięków naraz).
+        public event Action<EnemyDefinition> EnemyHit;
 
         private WaveDirector director;
         private EnemyMixer<EnemyDefinition> mixer;
@@ -65,6 +67,11 @@ namespace Arena.Gameplay
             }
             agent.Init(enemy, context, director.SpeedBonus);
             alive.Add(agent);
+            // Damaged przychodzi też przy trafieniu śmiertelnym (przed Died) — wtedy życie jest już na zerze.
+            agent.Health.Damaged += () =>
+            {
+                if (!agent.Health.IsDead) EnemyHit?.Invoke(enemy);
+            };
             agent.Health.Died += () =>
             {
                 alive.Remove(agent);

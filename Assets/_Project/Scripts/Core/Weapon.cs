@@ -16,11 +16,15 @@ namespace Arena.Core
             cooldown = 1f / shotsPerSecond;
         }
 
+        // Fakt „strzał oddany” — np. dla dźwięku. Pocisk tworzy ten, kto wołał TryFire.
+        public event Action Fired;
+
         // true = strzał wolno oddać teraz (i od tej chwili liczy się przerwa do następnego).
         public bool TryFire(float now)
         {
             if (now < nextShotTime) return false;
             nextShotTime = now + cooldown;
+            Fired?.Invoke();
             return true;
         }
     }

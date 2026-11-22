@@ -46,5 +46,19 @@ namespace Arena.Core.Tests
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new Weapon(shotsPerSecond: 0f));
         }
+
+        [Test]
+        public void Fired_OnlyForShotsActuallyTaken()
+        {
+            var weapon = new Weapon(shotsPerSecond: 4f);
+            int fired = 0;
+            weapon.Fired += () => fired++;
+
+            weapon.TryFire(now: 0f);    // strzał
+            weapon.TryFire(now: 0.1f);  // za wcześnie — bez zdarzenia
+            weapon.TryFire(now: 0.25f); // strzał
+
+            Assert.AreEqual(2, fired);
+        }
     }
 }

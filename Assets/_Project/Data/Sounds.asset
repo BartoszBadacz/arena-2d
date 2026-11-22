@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f32e1cceb7c82245b9ae01a4f73289e, type: 3}
+  m_Name: Sounds
+  m_EditorClassIdentifier: Arena.Data::Arena.Data.SoundBank
+  runStarted:
+    clips:
+    - {fileID: 8300000, guid: 5463c925b962adc4f8375426aaf19b0f, type: 3}
+    volume: 0.6
+    pitchJitter: 0
+  waveStarted:
+    clips:
+    - {fileID: 8300000, guid: b9e9d1572d7b67f44a5bc98d69f8bbf6, type: 3}
+    volume: 0.5
+    pitchJitter: 0
+  waveCleared:
+    clips:
+    - {fileID: 8300000, guid: 57a315e57f7ec4549ac13fd288ca8148, type: 3}
+    volume: 0.5
+    pitchJitter: 0
+  gameOver:
+    clips:
+    - {fileID: 8300000, guid: 3ae0f464ba3f17f4ba3a2936a5283951, type: 3}
+    - {fileID: 8300000, guid: 4a9e4e4da27282e4ea9964887927e242, type: 3}
+    volume: 0.8
+    pitchJitter: 0
+  shot:
+    clips:
+    - {fileID: 8300000, guid: 04e92baca1f4abd43a4eb86b849ee53b, type: 3}
+    - {fileID: 8300000, guid: 0e86e7d1ab4f6354682319c9e3f9cca5, type: 3}
+    - {fileID: 8300000, guid: 6487c07a222d98947a8b497168a1d16a, type: 3}
+    - {fileID: 8300000, guid: 0c2abd39672675340a5798119b75dbe1, type: 3}
+    - {fileID: 8300000, guid: b713e53ceb0cc954bad0b726eb5e2e2f, type: 3}
+    volume: 0.25
+    pitchJitter: 0.08
+  playerHurt:
+    clips:
+    - {fileID: 8300000, guid: cc90f1620e4cb614da7d4ca99cf98d6a, type: 3}
+    - {fileID: 8300000, guid: 7d80e011b6dee0b4e9004fb6ea74e688, type: 3}
+    - {fileID: 8300000, guid: 9a10a8da66ef047419613276a4d5cad3, type: 3}
+    - {fileID: 8300000, guid: 30b8399875654db4b9f924f2d565dc5c, type: 3}
+    - {fileID: 8300000, guid: 5261c83ae628e024fa4bef70b03fef0d, type: 3}
+    volume: 0.9
+    pitchJitter: 0.05
+  playerHealed:
+    clips:
+    - {fileID: 8300000, guid: c83eb768c34628245aef6c87318efe15, type: 3}
+    - {fileID: 8300000, guid: 61c372cd08361a44abeb65fd61247612, type: 3}
+    - {fileID: 8300000, guid: 7efb286b0a122eb4dad741009eb9dcf6, type: 3}
+    volume: 0.6
+    pitchJitter: 0
+  enemyHit:
+    clips:
+    - {fileID: 8300000, guid: a9c84a5f74b34b949b4492b17fe32f95, type: 3}
+    - {fileID: 8300000, guid: 09cdf628e3be3304a938d537e56aaa86, type: 3}
+    - {fileID: 8300000, guid: 38da4809b6c9e16449bfbf38bdbd073e, type: 3}
+    - {fileID: 8300000, guid: c164972d121dd2747ae103db7a4a57bd, type: 3}
+    - {fileID: 8300000, guid: 495e55b1e684ff046b42c937aba5cd6a, type: 3}
+    volume: 0.5
+    pitchJitter: 0.1
+  enemyKilled:
+    clips:
+    - {fileID: 8300000, guid: 8161f43d3eada184abbef6f790fc9bc7, type: 3}
+    - {fileID: 8300000, guid: f75c83da0113dc040b2c8be50b430575, type: 3}
+    volume: 0.6
+    pitchJitter: 0.1

@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 1759079}
   - component: {fileID: 1759078}
   - component: {fileID: 1759077}
+  - component: {fileID: 1759080}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -247,6 +248,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &1759080
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759076}
+  m_Enabled: 1
 --- !u!1 &310246922
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +384,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &998162437
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5873585212434972134, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873585212434972134, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873585212434972134, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873585212434972134, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873585212434972134, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873585212434972134, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873585212434972134, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873585212434972134, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873585212434972134, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873585212434972134, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963760318132315326, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+      propertyPath: m_Name
+      value: Audio
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+--- !u!114 &998162438 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5778650524883678117, guid: e5574f18133af9f4da907f0f325ab033, type: 3}
+  m_PrefabInstance: {fileID: 998162437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f04bd70dc9c8a4886fc456df66e8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Arena.Presentation::Arena.Presentation.GameAudio
 --- !u!1001 &1671286329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -531,6 +608,7 @@ MonoBehaviour:
   weaponDefinition: {fileID: 11400000, guid: d7392135c051b474f86b224d94e2a0fb, type: 2}
   waveConfig: {fileID: 11400000, guid: 17b056fcb49f0434d99e6d22a0460b1b, type: 2}
   arenaConfig: {fileID: 11400000, guid: ca8f03116a3a6fd449354241ba8735a1, type: 2}
+  soundBank: {fileID: 11400000, guid: e058445da5cdb6a4a9f8fae64c8034cd, type: 2}
   mainCamera: {fileID: 1759078}
   playerMover: {fileID: 6789755035540938897}
   playerShooter: {fileID: 6789755035540938898}
@@ -539,6 +617,7 @@ MonoBehaviour:
   runFlow: {fileID: 733424523}
   hud: {fileID: 1671286330}
   startScreen: {fileID: 1671286331}
+  gameAudio: {fileID: 998162438}
 --- !u!4 &1840054106
 Transform:
   m_ObjectHideFlags: 0
@@ -713,3 +792,4 @@ SceneRoots:
   - {fileID: 1820721507}
   - {fileID: 733424524}
   - {fileID: 1671286329}
+  - {fileID: 998162437}

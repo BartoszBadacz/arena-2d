@@ -20,6 +20,7 @@ namespace Arena.App
         [SerializeField] private WeaponDefinition weaponDefinition;
         [SerializeField] private WaveConfig waveConfig;
         [SerializeField] private ArenaConfig arenaConfig;
+        [SerializeField] private SoundBank soundBank;
 
         [Header("Scena")]
         [SerializeField] private Camera mainCamera;
@@ -30,6 +31,7 @@ namespace Arena.App
         [SerializeField] private RunFlow runFlow;
         [SerializeField] private Hud hud;
         [SerializeField] private StartScreen startScreen;
+        [SerializeField] private GameAudio gameAudio;
 
         private void Awake()
         {
@@ -54,6 +56,9 @@ namespace Arena.App
                 stats.RegisterKill(enemy.ScoreValue);
                 playerHealth.Heal(enemy.HealOnKill);
             };
+            // Fakty o wrogach → dźwięk (spawner jest w Gameplay, GameAudio w Presentation — znają się tylko tu)
+            enemySpawner.EnemyHit += _ => gameAudio.OnEnemyHit();
+            enemySpawner.EnemyKilled += _ => gameAudio.OnEnemyKilled();
 
             // Wstrzyknięcie do obiektów sceny
             playerMover.Init(playerDefinition);
@@ -63,6 +68,7 @@ namespace Arena.App
             runFlow.Init(session);
             hud.Init(playerHealth, stats, sessionRecord, session, waves);
             startScreen.Init(session);
+            gameAudio.Init(soundBank, weapon, playerHealth, waves, session);
 
             // Ekran startowy tylko przy pierwszym biegu w sesji; restart (R) startuje od razu.
             // Na końcu, żeby wszyscy słuchacze Started byli już podpięci.

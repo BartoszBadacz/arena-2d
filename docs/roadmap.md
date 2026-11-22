@@ -71,11 +71,18 @@ Kolejność: najpierw rdzeń w nowej architekturze, potem typy (wtedy nowy typ =
 
 Kolejność ustalona 2026-11-11:
 1. [x] **Próbny build WebGL** („staging” z Etapu 4 wyciągnięty na początek): przejście całej ścieżki od zera do gry w przeglądarce, zanim zaczniemy upiększać. Sprawdzić: mysz i celowanie w ramce strony, wydajność późnych fal, rozmiar i czas ładowania, skalowanie UI. → 2026-11-22: działa (celowanie, szybkie ładowanie, płynne fale); 13 MB; wniosek: obiekty za duże względem areny (patrz Etap 3, skala).
-2. **Podsumowanie projektu dla użytkownika**: przejście przez to, co jest (moduły, przepływ zdarzeń, dane, testy), bo zmiany z 2026-11-11 poszły szybko i trzeba je spokojnie zrozumieć.
+2. [x] **Podsumowanie projektu dla użytkownika**: przejście przez to, co jest (moduły, przepływ zdarzeń, dane, testy), bo zmiany z 2026-11-11 poszły szybko i trzeba je spokojnie zrozumieć. → 2026-11-22: moduły, bootstrap, zdarzenia i subskrypcje (kiedy `-=` jest potrzebne), maszyna stanów fal.
 
 ## Etap 3 — Grafika, dźwięk, szlif
 
-Zarys (do rozpisania po próbnym buildzie):
+Minimalny szlif przed publikacją (rozpisane 2026-11-22). Kolejność od najmniej zależnych, każdy krok grywalny:
+- [ ] 1. Ekran startowy: „kliknij, aby zacząć” + sterowanie. W przeglądarce klik daje fokus ramce (klawiatura w iframe na itch.io) i odblokowuje dźwięk. Restart (R) bez ekranu startowego.
+- [ ] 2. Dźwięki (Kenney, CC0) w Presentation, na istniejących zdarzeniach: strzał, trafienie i śmierć wroga, obrażenia gracza, leczenie (`Healed`), start fali, fala czysta (`WaveCleared`), Game Over
+- [ ] 3. Grafika: wybór stylu → PPU i rozmiar sprite'ów pod skalę ×0.7 (zapis w `notatki.md`) → podmiana sprite'ów w prefabach i wariantach, podłoga, ściany
+- [ ] 4. (opcjonalnie) juice: cząsteczki przy śmierci wroga, potrząsanie kamerą przy trafieniu gracza
+- [ ] 5. Build pod itch.io: Decompression Fallback (albo gzip), ewentualnie odchudzenie z nieużywanych tekstur URP
+
+Notatki wejściowe:
 - skala grafiki ustalona i zapisana w `notatki.md` przed pierwszym obrazkiem (PPU, rozmiar sprite'ów). Wejście z próbnego buildu: gracz (1 j.) i wrogowie są za duzi względem areny 26×14 przy kamerze 18 j. w pionie → [x] skala gry ×0.7 przyjęta po playteście (2026-11-22, gracz 0.7 j.); zostaje dobrać PPU i rozmiar sprite'ów pod te rozmiary
 - przed itch.io: „Decompression Fallback” albo gzip (serwer itch.io może nie wysyłać nagłówka Brotli); odchudzenie buildu (nieużywane tekstury URP: film grain, SMAA) — opcjonalnie
 - grafika Kenney (CC0): gracz, 3 typy wrogów, pocisk, podłoga, ściany — podmiana sprite'ów w prefabach i wariantach

@@ -1,5 +1,7 @@
 .hud {
     flex-grow: 1;
+    /* Cień dziedziczą wszystkie napisy — czytelność na jasnym betonie i deskach. */
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.75);
 }
 
 .hud__stats {

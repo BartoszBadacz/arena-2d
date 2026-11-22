@@ -8,17 +8,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1640354532557691286, guid: bc752221badd5fe499717e9c634dd6ef, type: 3}
+      propertyPath: flashColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640354532557691286, guid: bc752221badd5fe499717e9c634dd6ef, type: 3}
+      propertyPath: flashColor.g
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3945623888370670406, guid: bc752221badd5fe499717e9c634dd6ef, type: 3}
       propertyPath: m_Name
       value: Tank
       objectReference: {fileID: 0}
     - target: {fileID: 4398271572741294973, guid: bc752221badd5fe499717e9c634dd6ef, type: 3}
       propertyPath: m_Color.b
-      value: 0.75
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4398271572741294973, guid: bc752221badd5fe499717e9c634dd6ef, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4398271572741294973, guid: bc752221badd5fe499717e9c634dd6ef, type: 3}
       propertyPath: m_Color.r
-      value: 0.6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6107619543052078107, guid: bc752221badd5fe499717e9c634dd6ef, type: 3}
       propertyPath: m_Mass

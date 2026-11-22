@@ -6,13 +6,15 @@ using UnityEngine.InputSystem;
 namespace Arena.Gameplay
 {
     // Przytrzymany lewy przycisk myszy = ogień ciągły w stronę kursora.
-    // Kiedy wolno strzelić, decyduje Weapon (Core); tu tylko wejście, celowanie i tworzenie pocisku.
+    // Kiedy wolno strzelić, decyduje Weapon (Core); tu tylko wejście, celowanie (z obrotem postaci) i tworzenie pocisku.
+    [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerShooter : MonoBehaviour
     {
         private Weapon weapon;
         private WeaponDefinition definition;
         private Camera aimCamera;
         private InputAction attackAction;
+        private Rigidbody2D body;
 
         public void Init(Weapon weapon, WeaponDefinition definition, Camera aimCamera)
         {
@@ -24,6 +26,7 @@ namespace Arena.Gameplay
         private void Awake()
         {
             attackAction = InputSystem.actions.FindAction("Player/Attack", throwIfNotFound: true);
+            body = GetComponent<Rigidbody2D>();
         }
 
         private void Start()
@@ -35,7 +38,11 @@ namespace Arena.Gameplay
 
         private void Update()
         {
-            if (attackAction.IsPressed() && weapon.TryFire(Time.time)) Shoot(AimDirection());
+            Vector2 aim = AimDirection();
+            // Postać patrzy tam, gdzie celuje (sprite patrzy w prawo, +x). Przez Rigidbody2D, bo transform nadpisuje interpolacja.
+            // Przy zatrzymanym świecie (ekran startowy, Game Over) postać się nie obraca.
+            if (Time.timeScale > 0f) body.rotation = Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg;
+            if (attackAction.IsPressed() && weapon.TryFire(Time.time)) Shoot(aim);
         }
 
         // Pozycja myszy jest w pikselach ekranu — przeliczamy ją na jednostki świata gry.

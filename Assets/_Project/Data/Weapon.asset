@@ -15,5 +15,6 @@ MonoBehaviour:
   shotsPerSecond: 8
   projectileSpeed: 18
   projectileLifetime: 2
-  muzzleOffset: 0.7
+  projectileDamage: 1
+  muzzleOffset: 0.55
   projectilePrefab: {fileID: 6293422220031899211, guid: 747b5231a5516cb4c9e7bc2f00b7a959, type: 3}

@@ -17,6 +17,9 @@ namespace Arena.Gameplay
         private static readonly Collider2D[] Hits = new Collider2D[32];
         private static readonly System.Numerics.Vector2[] NeighbourPositions = new System.Numerics.Vector2[32];
 
+        [Tooltip("Jak szybko wróg obraca się w stronę ruchu (stopnie na sekundę). Wygląd, nie rozgrywka — dlatego w prefabie.")]
+        [SerializeField, Min(0f)] private float turnSpeed = 540f;
+
         private EnemyDefinition definition;
         private EnemyContext context;
         private float speed;
@@ -80,6 +83,16 @@ namespace Arena.Gameplay
             // Uciekający i chowający się nie mogą wbić się w ścianę (tarcie by ich zatrzymało) — ślizgają się wzdłuż niej.
             if (definition.Behavior != EnemyBehavior.Chase) velocity = Steering.KeepInside(self, velocity, context.ArenaHalfSize);
             body.linearVelocity = velocity.ToUnity();
+            FaceTowards(velocity);
+        }
+
+        // Sprite patrzy w prawo (+x), więc kąt obrotu = kierunek ruchu. Skręt ograniczony, żeby przepychanie
+        // w tłumie (separacja) i skoki w bok nie szarpały postacią. Collider jest kołem, więc obrót nie zmienia fizyki.
+        private void FaceTowards(System.Numerics.Vector2 velocity)
+        {
+            if (velocity.LengthSquared() < 0.01f) return; // stojąc, zostaje zwrócony tam, gdzie był
+            float target = Mathf.Atan2(velocity.Y, velocity.X) * Mathf.Rad2Deg;
+            body.rotation = Mathf.MoveTowardsAngle(body.rotation, target, turnSpeed * Time.fixedDeltaTime);
         }
 
         // Do kryjówki (losowy inny wróg); bez kryjówki — ucieczka przed graczem.

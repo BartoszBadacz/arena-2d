@@ -67,6 +67,8 @@ Kolejność: najpierw rdzeń w nowej architekturze, potem typy (wtedy nowy typ =
 
 ## Następna sesja
 
+2026-11-22: decyzja — **kończymy arenę najkrótszą drogą do publikacji** (build → minimalny szlif z Etapu 3 → itch.io). Dalsze strojenie balansu nie blokuje publikacji. Eksploracje grafiki pod grę nr 2 odłożone (patrz `notatki.md`, 2026-11-22).
+
 Kolejność ustalona 2026-11-11:
 1. **Próbny build WebGL** („staging” z Etapu 4 wyciągnięty na początek): przejście całej ścieżki od zera do gry w przeglądarce, zanim zaczniemy upiększać. Sprawdzić: mysz i celowanie w ramce strony, wydajność późnych fal, rozmiar i czas ładowania, skalowanie UI.
 2. **Podsumowanie projektu dla użytkownika**: przejście przez to, co jest (moduły, przepływ zdarzeń, dane, testy), bo zmiany z 2026-11-11 poszły szybko i trzeba je spokojnie zrozumieć.

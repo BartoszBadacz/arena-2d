@@ -218,3 +218,6 @@ Kompresja gzip + Decompression Fallback (zamiast domyślnego Brotli bez fallback
 
 2026-11-22 · tarcie · Build WebGL przy otwartym edytorze i pakowanie ZIP
 (1) `unity build --profile` odmawia, gdy projekt jest otwarty w edytorze („already open in a running Editor”). Przez otwarty edytor buduje tylko `--target`, a WebGL wymaga profilu. Obejście: `script eval --timeout 2400` z `BuildPipeline.BuildPlayer(new BuildPlayerWithProfileOptions { buildProfile = ..., locationPathName = "Builds/WebGL" })`, który zwraca `BuildReport` (wynik, czas, rozmiar, błędy). (2) `Compress-Archive` z Windows PowerShell 5 zapisuje w ZIP-ie ścieżki z `\` (`Build\WebGL.loader.js`). itch.io i inne narzędzia rozpakowałyby to jako płaskie pliki z ukośnikiem w nazwie, więc gra by nie wystartowała. Pakować `zipfile` z Pythona (ścieżki z `/`) i sprawdzać `unzip -l`.
+
+2026-11-22 · tarcie · Przeglądarka w VS Code nie odtwarza dźwięku z buildu WebGL
+Build otwarty we wbudowanej przeglądarce VS Code: alert „EncodingError: Unable to decode audio data”, po zamknięciu gra działa, ale bez dźwięku. Przyczyna: Unity w buildzie WebGL koduje dźwięk jako AAC (niezależnie od `.ogg` w projekcie), a Electron (VS Code) ma okrojone kodeki bez AAC. W Chrome ten sam build gra z dźwiękiem. Reguła: buildy WebGL testować w zwykłej przeglądarce (Chrome / Edge / Firefox), nie w podglądzie edytora.

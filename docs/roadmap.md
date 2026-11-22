@@ -81,7 +81,7 @@ Minimalny szlif przed publikacją (rozpisane 2026-11-22). Kolejność od najmnie
 - [x] 2. Dźwięki (Kenney, CC0) w Presentation, na istniejących zdarzeniach: strzał, trafienie i śmierć wroga, obrażenia gracza, leczenie (`Healed`), start fali, fala czysta (`WaveCleared`), Game Over
 - [x] 3. Grafika: styl wybrany — Kenney Top-down Shooter, zombie (2026-11-22) → PPU i rozmiar sprite'ów pod skalę ×0.7 (zapis w `notatki.md`) → podmiana sprite'ów w prefabach i wariantach, podłoga, ściany
 - [ ] 4. (opcjonalnie) juice: cząsteczki przy śmierci wroga, potrząsanie kamerą przy trafieniu gracza
-- [ ] 5. Build pod itch.io: Decompression Fallback (albo gzip), ewentualnie odchudzenie z nieużywanych tekstur URP
+- [x] 5. Build pod itch.io: gzip + Decompression Fallback, ramka 960×540 → `Builds/arena-itch.zip` (18 MB); test bez nagłówków kompresji w Chrome: działa, dźwięk gra (2026-11-22). Odchudzenie z nieużywanych tekstur URP — opcjonalnie, później
 
 Notatki wejściowe:
 - skala grafiki ustalona i zapisana w `notatki.md` przed pierwszym obrazkiem (PPU, rozmiar sprite'ów). Wejście z próbnego buildu: gracz (1 j.) i wrogowie są za duzi względem areny 26×14 przy kamerze 18 j. w pionie → [x] skala gry ×0.7 przyjęta po playteście (2026-11-22, gracz 0.7 j.); zostaje dobrać PPU i rozmiar sprite'ów pod te rozmiary
@@ -92,6 +92,12 @@ Notatki wejściowe:
 - ekran startowy („kliknij, aby zacząć” — w przeglądarce potrzebny też do odblokowania dźwięku)
 
 ## Etap 4 — Publikacja na itch.io (WebGL/WebGPU)
+
+Rozpisane 2026-11-22. Wgrywa użytkownik (jego konto); agent przygotowuje paczkę, teksty i zrzuty.
+- [ ] 1. Strona gry jako szkic (Draft / Restricted): rodzaj HTML, upload `Builds/arena-itch.zip`, „played in the browser”, ramka 960×540, przycisk pełnego ekranu
+- [ ] 2. Test na itch.io w Chrome: ładowanie, klik startowy, klawiatura w ramce, dźwięk, pełny ekran
+- [ ] 3. Treść strony: tytuł, opis, sterowanie, tagi, podziękowania dla Kenney (CC0), zrzuty ekranu; okładka (630×500) — opcjonalnie z Higgsfield
+- [ ] 4. Publikacja (Public) + wpis w `notatki.md`: co poszło gładko, co tarło — materiał na proces przy grze nr 2
 
 ## Może kiedyś
 
